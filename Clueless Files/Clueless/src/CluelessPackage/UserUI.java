@@ -1,4 +1,4 @@
-package CluelessPackage;
+
 
 import javax.swing.JFrame;  
 import javax.swing.JPanel;
@@ -281,8 +281,8 @@ private UserUI thisUI = this;
 		scrollPane.setBounds(20, 564, 572, 76);
 		contentPane.add(scrollPane);
 		
-		chatDisplay = new JTextArea();
-		scrollPane.setViewportView(chatDisplay);
+		setChatDisplay(new JTextArea());
+		scrollPane.setViewportView(getChatDisplay());
 		
 		chatEntry = new JTextField();
 		chatEntry.setBounds(20, 651, 570, 20);
@@ -302,6 +302,12 @@ private UserUI thisUI = this;
 				endTurnRequested();
 			}
 		});
+	}
+	
+	User getCurrentUser(){
+		
+		return this.user;
+		
 	}
 	
 	void deactivateAllButtonsExceptChat() {
@@ -402,7 +408,27 @@ private UserUI thisUI = this;
 	}
 
 	void addChatLine(String string) {
-		appendToTextArea(chatDisplay, string);
+		
+		
+		appendToTextArea(getChatDisplay(), string);
 		
 	}
+
+	public JTextArea getChatDisplay() {
+		return chatDisplay;
+	}
+	
+	public void setChatDisplayText(String chatDisplay){
+		
+		this.chatDisplay.setText(chatDisplay);
+		
+	}
+	
+	public void setChatDisplay(JTextArea chatDisplay){
+		
+		this.chatDisplay = chatDisplay;
+		
+	}
+
+
 }

@@ -1,4 +1,4 @@
-package CluelessPackage;
+
 
 
 import java.util.ArrayList;
@@ -78,6 +78,12 @@ public class User {
 			view.setPlayer(i, users.get(i));
 		}
 
+	}
+	
+	UserUI getUserUI(){
+		
+		return this.view;
+		
 	}
 
 	void updatePlayerPositionsView() {

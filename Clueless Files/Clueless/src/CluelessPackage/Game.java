@@ -1,7 +1,9 @@
-package CluelessPackage;
 
 
-import java.util.ArrayList; 
+
+import java.util.ArrayList;
+
+import javax.swing.JTextArea; 
 
 public class Game {
 	
@@ -152,8 +154,15 @@ public class Game {
 
 
 	 void handleSuggestion(String suggestedCharacter, String suggestedWeapon, String suggestedRoom, User suggestingUser) {
-
+		 
+		 JTextArea suggestingUserTextArea = suggestingUser.getUserUI().getChatDisplay();
+		 String userText = suggestingUserTextArea.getText();
+		 
 		 systemChat.sendSystemMessage(suggestingUser.username +" is suggesting " +suggestedCharacter +" in the "+ suggestedRoom + " with the " +suggestedWeapon+":");
+		 
+		 suggestingUser.getUserUI().setChatDisplayText("");
+		 suggestingUser.getUserUI().setChatDisplayText(userText);
+		 
 		 GameBoard b = gameboard;
 		 
 		//move the accused to the room

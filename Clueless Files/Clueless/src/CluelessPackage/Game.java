@@ -53,7 +53,7 @@ public class Game {
 		//determine the cards that go in the envelope
 		murderer = deck.drawCharacter();
 		murderWeapon = deck.drawWeapon();
-		murderRoom= deck.drawWeapon();
+		murderRoom= deck.drawRoom();
 		
 		//now, mix all the cards together before dealing
 		deck.combineDecks();

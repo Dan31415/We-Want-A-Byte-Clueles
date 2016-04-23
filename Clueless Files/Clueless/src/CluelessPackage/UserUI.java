@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JEditorPane;
+import javax.swing.JOptionPane;
 
 public class UserUI extends JFrame {
 
@@ -65,7 +66,9 @@ private UserUI thisUI = this;
 		this.user = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 827, 867);
+              //  JScrollPane scrPane = new JScrollPane();
 		contentPane = new JPanel();
+               // scrPane.add(contentPane);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
@@ -305,6 +308,18 @@ private UserUI thisUI = this;
 		editorPane.setBounds(563, 589, 227, 185);
 		contentPane.add(editorPane);
 		
+                JButton helpButton = new JButton("Help");
+                helpButton.setBounds(594, 500, 180, 50);
+                helpButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        JOptionPane.showMessageDialog(contentPane,
+                        "help here");
+                    }
+                
+                });
+                contentPane.add(helpButton);
+                
+                
 		JLabel lblNotePad = new JLabel("Note Pad");
 		lblNotePad.setBounds(652, 564, 97, 14);
 		contentPane.add(lblNotePad);
@@ -313,6 +328,9 @@ private UserUI thisUI = this;
 				endTurnRequested();
 			}
 		});
+                
+   
+                  
 	}
 	
 	User getCurrentUser(){

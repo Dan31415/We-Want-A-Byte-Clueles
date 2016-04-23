@@ -44,13 +44,11 @@ public class Game {
 	 void initialize() {
 		//Make 3 new users
 		users.add(new User("Dan", "Miss Scarlet"));
-		users.add(new User("Nabil", "Professor Plumb"));
+		users.add(new User("Nabil", "Professor Plum"));
 		users.add(new User("Amanda", "Mrs. Peacock"));
 		
 		//put them on the board
-		gameboard.putUserOnStartingLocation(users.get(0), 0);
-		gameboard.putUserOnStartingLocation(users.get(1), 10);
-		gameboard.putUserOnStartingLocation(users.get(2), 4);
+		gameboard.putUserOnStartingLocation(this.users);
 		
 		//determine the cards that go in the envelope
 		murderer = deck.drawCharacter();

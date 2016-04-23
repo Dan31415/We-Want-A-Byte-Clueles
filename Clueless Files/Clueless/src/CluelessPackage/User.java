@@ -131,6 +131,20 @@ public class User {
 		
 	}
 
+	/**
+	 * added character getters and setters
+	 * @author Adam Turbiville
+	 */
+   public String getCharacter()
+   {
+      return this.character;
+   }
+
+   public void setCharacter(String character)
+   {
+      this.character = character;
+   }
+
 	
 	
 

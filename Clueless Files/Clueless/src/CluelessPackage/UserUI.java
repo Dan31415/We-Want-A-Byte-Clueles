@@ -7,13 +7,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+
 import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import java.awt.Font;
+
 import javax.swing.JScrollPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 
@@ -37,7 +43,7 @@ public class UserUI extends JFrame {
 	private ArrayList<LocationButton> locationButtonList;
 	private ArrayList<JLabel> userlabels;
 	private ArrayList<JTextField> userLocations;
-	
+	public ClientMessenger cMessenger;
 private UserUI thisUI = this;
 	private User user;
 	private JTextField chatEntry;
@@ -60,8 +66,9 @@ private UserUI thisUI = this;
 	/**
 	 * Create the frame.
 	 * @param userView 
+	 * @throws Exception 
 	 */
-	UserUI(User user) {
+	UserUI(User user) throws Exception {
 		Chatboard.getChatboard().addUI(this);
 		this.user = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,7 +82,7 @@ private UserUI thisUI = this;
 		locationButtonList = new ArrayList<LocationButton>();
 		userChat = Chatboard.getChatboard();
 		
-
+		cMessenger = new ClientMessenger(this);
 
 		
 		UserUI frame = this;

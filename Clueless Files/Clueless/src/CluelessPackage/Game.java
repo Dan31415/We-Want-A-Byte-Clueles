@@ -1,3 +1,5 @@
+package CluelessPackage;
+
 
 
 
@@ -16,13 +18,14 @@ public class Game {
 	private Chatboard systemChat;
 	private Deck deck;
 	private GameBoard gameboard; 
-	
+	private static String username;
 	/**
 	 * This class implements the singleton pattern for global access.
 	 */
 	private static Game thisGame = null;
 	
-	private Game(){
+	private Game(String p_username) {
+		username = p_username;
 		systemChat= Chatboard.getChatboard();
 		deck = Deck.getDeck();
 		gameboard = GameBoard.getBoard();
@@ -30,7 +33,7 @@ public class Game {
 
 	static Game getGame() {
 		if (thisGame == null){
-			thisGame = new Game();
+			thisGame = new Game(username);
 		}
 		return thisGame;
 	}
@@ -38,22 +41,23 @@ public class Game {
 	
 	/**
 	 * Adds new users. Just a stand-in for the dynamic joining for now.
+	 * @throws Exception 
 	 */
-	 void initialize() {
+	 void initialize(String p_username) throws Exception {
 		//Make 3 new users
-		users.add(new User("Dan", "Miss Scarlet"));
-		users.add(new User("Nabil", "Professor Plumb"));
-		users.add(new User("Amanda", "Mrs. Peacock"));
+		 System.out.println(p_username);
+		 
+		users.add(new User(p_username, "Miss Scarlet"));
+		//users.add(new User("Nabil", "Professor Plum"));
+		//users.add(new User("Amanda", "Mrs. Peacock"));
 		
 		//put them on the board
-		gameboard.putUserOnStartingLocation(users.get(0), 0);
-		gameboard.putUserOnStartingLocation(users.get(1), 10);
-		gameboard.putUserOnStartingLocation(users.get(2), 4);
+		gameboard.putUserOnStartingLocation(this.users);
 		
 		//determine the cards that go in the envelope
 		murderer = deck.drawCharacter();
 		murderWeapon = deck.drawWeapon();
-		murderRoom= deck.drawWeapon();
+		murderRoom= deck.drawRoom();
 		
 		//now, mix all the cards together before dealing
 		deck.combineDecks();

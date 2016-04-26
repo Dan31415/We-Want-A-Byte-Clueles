@@ -7,21 +7,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-
 import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import java.awt.Font;
-
 import javax.swing.JScrollPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JEditorPane;
-import javax.swing.JOptionPane;
 
 public class UserUI extends JFrame {
 
@@ -43,7 +35,7 @@ public class UserUI extends JFrame {
 	private ArrayList<LocationButton> locationButtonList;
 	private ArrayList<JLabel> userlabels;
 	private ArrayList<JTextField> userLocations;
-	public ClientMessenger cMessenger;
+	
 private UserUI thisUI = this;
 	private User user;
 	private JTextField chatEntry;
@@ -66,23 +58,20 @@ private UserUI thisUI = this;
 	/**
 	 * Create the frame.
 	 * @param userView 
-	 * @throws Exception 
 	 */
-	UserUI(User user) throws Exception {
+	UserUI(User user) {
 		Chatboard.getChatboard().addUI(this);
 		this.user = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 827, 867);
-              //  JScrollPane scrPane = new JScrollPane();
+		setBounds(100, 100, 827, 720);
 		contentPane = new JPanel();
-               // scrPane.add(contentPane);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		locationButtonList = new ArrayList<LocationButton>();
 		userChat = Chatboard.getChatboard();
 		
-		cMessenger = new ClientMessenger(this);
+
 
 		
 		UserUI frame = this;
@@ -100,7 +89,7 @@ private UserUI thisUI = this;
 				
 				cardDisplay = new JTextArea();
 				cardDisplay.setEditable(false);
-				cardDisplay.setBounds(354, 589, 174, 185);
+				cardDisplay.setBounds(616, 415, 174, 185);
 				contentPane.add(cardDisplay);
 				
 				LocationButton location20 = new LocationButton("Hall", 20);
@@ -287,18 +276,18 @@ private UserUI thisUI = this;
 		contentPane.add(lblLocation);
 		
 		JLabel lblYourCards = new JLabel("Your Cards");
-		lblYourCards.setBounds(408, 564, 97, 14);
+		lblYourCards.setBounds(677, 390, 97, 14);
 		contentPane.add(lblYourCards);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 564, 287, 162);
+		scrollPane.setBounds(20, 564, 572, 76);
 		contentPane.add(scrollPane);
 		
 		setChatDisplay(new JTextArea());
 		scrollPane.setViewportView(getChatDisplay());
 		
 		chatEntry = new JTextField();
-		chatEntry.setBounds(20, 737, 287, 20);
+		chatEntry.setBounds(20, 651, 570, 20);
 		contentPane.add(chatEntry);
 		chatEntry.setColumns(10);
 		
@@ -308,36 +297,13 @@ private UserUI thisUI = this;
 				Chatboard.getChatboard().sendUserMessage(user.username, chatEntry.getText() );
 			}
 		});
-		btnSend.setBounds(117, 768, 89, 23);
+		btnSend.setBounds(604, 648, 89, 23);
 		contentPane.add(btnSend);
-		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(563, 589, 227, 185);
-		contentPane.add(editorPane);
-		
-                JButton helpButton = new JButton("Help");
-                helpButton.setBounds(594, 500, 180, 50);
-                helpButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent arg0) {
-                        JOptionPane.showMessageDialog(contentPane,
-                        "help here");
-                    }
-                
-                });
-                contentPane.add(helpButton);
-                
-                
-		JLabel lblNotePad = new JLabel("Note Pad");
-		lblNotePad.setBounds(652, 564, 97, 14);
-		contentPane.add(lblNotePad);
 		endTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				endTurnRequested();
 			}
 		});
-                
-   
-                  
 	}
 	
 	User getCurrentUser(){
@@ -465,4 +431,6 @@ private UserUI thisUI = this;
 		this.chatDisplay = chatDisplay;
 		
 	}
+
+
 }

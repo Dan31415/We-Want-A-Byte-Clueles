@@ -11,18 +11,40 @@ package CluelessPackage;
  */
 public class GameRunner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		// also can parse for hostname, if hostname == CluelessServer...
+		// if (InetAddress.getLocalHost.getHostName().equals("CluelessServer") { }
+		if (args.length > 0) {
+			if ( args[0].equals("server")) {
+				ServerMessenger sMessenger = new ServerMessenger();
+				sMessenger.main(null);
+			}
+			else {
+				//initialize the gameboard
+				GameBoard.getBoard().initialize();
 		
-		//initialize the gameboard
-		GameBoard.getBoard().initialize();
+				//initialize the game
+				System.out.println(args[0]);
+				Game.getGame().initialize(args[0]);
 		
-		//initialize the game
-		Game.getGame().initialize();
+				//*******insert something like Game.getGame.AddUsers(<a list of users>);************
 		
-		//*******insert something like Game.getGame.AddUsers(<a list of users>);************
-		
-		//Get the game going
-		Game.getGame().selectFirstPlayer();
+				//Get the game going
+				Game.getGame().selectFirstPlayer();
+			}
+		}
+		else { 
+			//initialize the gameboard
+			GameBoard.getBoard().initialize();
+	
+			//initialize the game
+			Game.getGame().initialize("Generic User");
+	
+			//*******insert something like Game.getGame.AddUsers(<a list of users>);************
+	
+			//Get the game going
+			Game.getGame().selectFirstPlayer();
+		}
 	}
 
 }

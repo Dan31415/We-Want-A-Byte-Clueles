@@ -229,13 +229,39 @@ public class GameBoard {
 	 * "moveUserTo" in that it does not remove a user from their current
 	 * location (which, at the start of the game, would be null).
 	 * 
-	 * @param user
-	 *            The user to be put on the given location.
-	 * @param i
-	 *            The index of the location to put the user.
+	 * @param users
+	 *            Array list holding all the users for this game
+	 * Modified: 4/23/16, Adam Turbiville           
 	 */
-	void putUserOnStartingLocation(User user, int i) {
-		userLocations.put(user, new Integer(i));
+	void putUserOnStartingLocation(ArrayList<User> users) {
+		
+		for (int i=0; i < users.size(); i++)  {
+		   User currentUser = users.get(i);
+		   String userCharacter = currentUser.getCharacter();
+		   
+		   switch (userCharacter)   {
+		      case "Miss Scarlet":
+		         userLocations.put(currentUser, new Integer(3));
+		         break;
+		      case "Mrs. Peacock":
+               userLocations.put(currentUser, new Integer(13));
+               break;
+		      case "Mr. Green":
+               userLocations.put(currentUser, new Integer(17));
+               break;
+		      case "Professor Plum":
+               userLocations.put(currentUser, new Integer(5));
+               break;
+		      case "Col Mustard":
+               userLocations.put(currentUser, new Integer(7));
+               break;
+		      case "Mrs. White":
+               userLocations.put(currentUser, new Integer(19));
+               break;
+            default:
+               break;
+		   }
+	   }
 	}
 
 	/**

@@ -1,5 +1,3 @@
-package CluelessPackage;
-
 
 
 
@@ -17,7 +15,7 @@ public class User {
 	//private GameBoard board;
 	private boolean isUserTurn;
 	
-	User(String username, String character) throws Exception{
+	User(String username, String character){
 		this.username = username;
 		this.character = character;
 		isInTheGame = true;
@@ -130,20 +128,6 @@ public class User {
 		view.makeSuccessfulSuggestionWindow(matchingCard, matchingUser.username);
 		
 	}
-
-	/**
-	 * added character getters and setters
-	 * @author Adam Turbiville
-	 */
-   public String getCharacter()
-   {
-      return this.character;
-   }
-
-   public void setCharacter(String character)
-   {
-      this.character = character;
-   }
 
 	
 	

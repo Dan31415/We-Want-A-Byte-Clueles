@@ -17,7 +17,7 @@ public class User {
 	//private GameBoard board;
 	private boolean isUserTurn;
 	
-	User(String username, String character){
+	User(String username, String character) throws Exception{
 		this.username = username;
 		this.character = character;
 		isInTheGame = true;

@@ -47,6 +47,7 @@ public class UserUI extends JFrame {
 private UserUI thisUI = this;
 	private User user;
 	private JTextField chatEntry;
+	private int playersDrawn;
 	/**
 	 * Launch the application.
 	 
@@ -281,6 +282,8 @@ private UserUI thisUI = this;
 		contentPane.add(user3Label);
 		userlabels.add(user3Label);
 		
+		playersDrawn = 0; // initially, only single player connected
+		
 		JLabel lblLocation = new JLabel("Location");
 		lblLocation.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblLocation.setBounds(706, 231, 84, 14);
@@ -344,6 +347,15 @@ private UserUI thisUI = this;
 		
 		return this.user;
 		
+	}
+	
+	int getPlayersDrawn() {
+		return playersDrawn;
+	}
+	
+	void addPlayer(String username, String character) {
+		userlabels.get(playersDrawn).setText(username+" ("+character+")");
+		playersDrawn ++;
 	}
 	
 	void deactivateAllButtonsExceptChat() {

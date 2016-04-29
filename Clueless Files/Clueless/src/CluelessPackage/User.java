@@ -28,7 +28,7 @@ public class User {
 	
 		//creates a view and UI for the user
 		view = new UserUI(this);
-		
+		view.cMessenger.sendMessage("init,"+username);
 		//just makes sure that everyone starts in the "it's not my turn" state until the game picks a starting player.
 		deactivate();
 		

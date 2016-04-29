@@ -3,16 +3,16 @@ package CluelessPackage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.TreeMap;
 import java.io.*;
 import java.net.*;
 
 public class ServerMessenger {
-	public ArrayList<Map<String, Map<String, String>>> Users;
+	public static ArrayList<Map<String, Map<String, String>>> Users;
 	static String IP;
 	static int port;
 	static int playerCount;
     public static ArrayList<ConnectionThread> connectedClients;
-
     
     static class ConnectionThread extends Thread {
 
@@ -69,7 +69,18 @@ public class ServerMessenger {
                     		socket.close();
                     		System.out.println("Disconnected from client" + playerNum);
                     		return ;
-                    	} else {
+                    	} 
+                    	else {
+                    		/*// need to handle the case where someone just connected to existing game
+                    		if (connectedClients.size() > 1 && args_incoming.get(0).equals("init")) {
+                    			TreeMap n = new TreeMap();
+                    			n.put(args_incoming.get(1), "Character X");
+                    			Users.add(playerNum, n);
+                    			// append all players to list
+                    			for (int i = 0; i < connectedClients.size(); i++) {
+                    				str_incoming = str_incoming + Users.get
+                    			}
+                    		}*/
                     		// iterate through all the connected clients, sending the data that we just received
                     		for (int i = 0; i < connectedClients.size(); i++) {
                     			try {
@@ -84,7 +95,7 @@ public class ServerMessenger {
                     }
                     else {
                     	socket.close();
-                		System.out.println("Disconnected from client" + playerNum);
+                		System.out.println("Disconnected from player " + playerNum);
                 		connectedClients.remove(this);
                 		return ;
                     }

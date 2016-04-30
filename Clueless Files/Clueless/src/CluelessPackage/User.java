@@ -4,6 +4,7 @@ package CluelessPackage;
 
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class User {
 
@@ -16,8 +17,11 @@ public class User {
 	private Game game;
 	//private GameBoard board;
 	private boolean isUserTurn;
+	public GameBoard gameBoard;
+	public ServerMessenger sMessenger;
+	public int[] validMoves;
 	
-	User(String username, String character) throws Exception{
+	User(String username, String character, boolean serverSide) throws Exception{
 		this.username = username;
 		this.character = character;
 		isInTheGame = true;
@@ -25,34 +29,59 @@ public class User {
 		game = Game.getGame();
 		isUserTurn = false;
 		//board = GameBoard.getBoard();
-	
+		sMessenger = new ServerMessenger();
+		
 		//creates a view and UI for the user
+		if (serverSide) {
+			sendDeactivate();
+			return;
+		}
 		view = new UserUI(this);
-		view.cMessenger.sendMessage("init,"+username);
+		view.cMessenger.sendMessage("init,"+username+","+character);
+		
+		gameBoard = GameBoard.getBoard();
+		gameBoard.initialize();
+
 		//just makes sure that everyone starts in the "it's not my turn" state until the game picks a starting player.
 		deactivate();
 		
 		
 	}
 	
+	void sendDeactivate() {
+		sMessenger.sendMessage("deactivate");
+	}
+	
 	void deactivate() {
 		view.deactivateAllButtonsExceptChat();
 		isUserTurn = false;
-		
 	}
 
+	void sendBeginTurn() {
+		sMessenger.sendMessage("begin_turn,"+this.getCharacter());
+	}
+	
 	void endTurn() {
+		
 		game.endTurnRequest(this);
 	}
-
-	void beginTurn() {		
+	
+	void beginTurn() throws Exception {		
 		isUserTurn = true;
+		//int[] validMoves = serverRequestValidMoves(this);
+		//serverRequestValidMoves(this);
 		int[] validMoves = game.requestValidMoves(this);
 		view.enableLocations(validMoves);
 		view.enableAccuseButton();
 		view.enableEndTurnButton();
 	}
 
+	void serverRequestValidMoves(User user) throws Exception {
+		//view.cMessenger.sendMessage("req_valid_moves," + user.character);
+		//TimeUnit.SECONDS.sleep(1);
+		//return gameboard.getValidMoves(user);
+	}
+	
 	void moveTo(int i){
 		game.requestMoverTo(this, i);
 		view.deactivateMovement();
@@ -72,7 +101,13 @@ public class User {
 		game.handleSuggestion(suggestedCharacter, suggestedWeapon, suggestedRoom, this);
 	}
 	
+	void sendInitializeView() {
+		sMessenger.sendMessage("init_view");
+	}
+	
 	void initializeView(){
+		gameBoard.putSingleUserOnStartingLocation(this);
+
 		ArrayList<User> users = game.users;
 		view.updateCardList(cards);
 		
@@ -90,7 +125,7 @@ public class User {
 
 	void updatePlayerPositionsView() {
 		for (int i = 0; i < game.users.size() ; i++){
-			view.setPlayerLocation(i, game.requestLocationOfPlayer(i));
+		//	view.setPlayerLocation(i, game.requestLocationOfPlayer(i)); // needed to be commented out since we dont have access to User view
 			
 		}
 	}

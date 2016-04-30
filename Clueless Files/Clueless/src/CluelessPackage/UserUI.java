@@ -44,8 +44,8 @@ public class UserUI extends JFrame {
 	private ArrayList<JLabel> userlabels;
 	private ArrayList<JTextField> userLocations;
 	public ClientMessenger cMessenger;
-private UserUI thisUI = this;
-	private User user;
+	private UserUI thisUI = this;
+	public User user;
 	private JTextField chatEntry;
 	private int playersDrawn;
 	/**
@@ -393,8 +393,8 @@ private UserUI thisUI = this;
 	}
 
 
-	 void moveRequest(int location) {
-		user.moveTo(location);
+	 void moveRequest(int location) { // called by button clicked on 
+		user.moveTo(location); //msg to server (move,gerard,library)
 		
 	}
 

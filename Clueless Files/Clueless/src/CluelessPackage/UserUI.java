@@ -9,16 +9,28 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+
 import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import java.awt.Font;
+<<<<<<< HEAD
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+=======
+
+import javax.swing.JScrollPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+>>>>>>> master
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -45,10 +57,11 @@ public class UserUI extends JFrame {
 	private ArrayList<LocationButton> locationButtonList;
 	private ArrayList<JLabel> userlabels;
 	private ArrayList<JTextField> userLocations;
-	
+	public ClientMessenger cMessenger;
 private UserUI thisUI = this;
 	private User user;
 	private JTextField chatEntry;
+	private int playersDrawn;
 	/**
 	 * Launch the application.
 	 
@@ -68,8 +81,9 @@ private UserUI thisUI = this;
 	/**
 	 * Create the frame.
 	 * @param userView 
+	 * @throws Exception 
 	 */
-	UserUI(User user) {
+	UserUI(User user) throws Exception {
 		Chatboard.getChatboard().addUI(this);
 		this.user = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,7 +101,7 @@ private UserUI thisUI = this;
 		locationButtonList = new ArrayList<LocationButton>();
 		userChat = Chatboard.getChatboard();
 		
-
+		cMessenger = new ClientMessenger(this);
 
 		
 		UserUI frame = this;
@@ -287,6 +301,8 @@ private UserUI thisUI = this;
 		contentPane.add(user3Label);
 		userlabels.add(user3Label);
 		
+		playersDrawn = 0; // initially, only single player connected
+		
 		JLabel lblLocation = new JLabel("Location");
 		lblLocation.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblLocation.setBounds(706, 231, 84, 14);
@@ -416,6 +432,15 @@ private UserUI thisUI = this;
 		
 		return this.user;
 		
+	}
+	
+	int getPlayersDrawn() {
+		return playersDrawn;
+	}
+	
+	void addPlayer(String username, String character) {
+		userlabels.get(playersDrawn).setText(username+" ("+character+")");
+		playersDrawn ++;
 	}
 	
 	void deactivateAllButtonsExceptChat() {

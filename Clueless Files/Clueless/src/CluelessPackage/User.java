@@ -17,7 +17,7 @@ public class User {
 	//private GameBoard board;
 	private boolean isUserTurn;
 	
-	User(String username, String character){
+	User(String username, String character) throws Exception{
 		this.username = username;
 		this.character = character;
 		isInTheGame = true;
@@ -28,7 +28,7 @@ public class User {
 	
 		//creates a view and UI for the user
 		view = new UserUI(this);
-		
+		view.cMessenger.sendMessage("init,"+username);
 		//just makes sure that everyone starts in the "it's not my turn" state until the game picks a starting player.
 		deactivate();
 		
@@ -130,6 +130,20 @@ public class User {
 		view.makeSuccessfulSuggestionWindow(matchingCard, matchingUser.username);
 		
 	}
+
+	/**
+	 * added character getters and setters
+	 * @author Adam Turbiville
+	 */
+   public String getCharacter()
+   {
+      return this.character;
+   }
+
+   public void setCharacter(String character)
+   {
+      this.character = character;
+   }
 
 	
 	

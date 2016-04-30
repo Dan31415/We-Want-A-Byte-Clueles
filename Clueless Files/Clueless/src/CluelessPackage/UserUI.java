@@ -335,7 +335,12 @@ public class UserUI extends JFrame {
 		contentPane.add(lblNotePad);
 		endTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				endTurnRequested();
+				try {
+					endTurnRequested();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
                 
@@ -398,7 +403,7 @@ public class UserUI extends JFrame {
 		
 	}
 
-	 void endTurnRequested() {
+	 void endTurnRequested() throws Exception {
 		user.endTurn();
 		
 	}
@@ -409,7 +414,7 @@ public class UserUI extends JFrame {
 		
 	}
 
-	 void passOnAccusation(String character, String weapon, String room) {
+	 void passOnAccusation(String character, String weapon, String room) throws Exception {
 		user.makeAccusation(character, weapon, room);
 	}
 	

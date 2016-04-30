@@ -52,6 +52,10 @@ public class User {
 		sMessenger.sendMessage("deactivate");
 	}
 	
+	void sendDeactivateSingle() {
+		sMessenger.sendMessage("deactivate"+this.character);
+	}
+	
 	void deactivate() {
 		view.deactivateAllButtonsExceptChat();
 		isUserTurn = false;
@@ -61,9 +65,17 @@ public class User {
 		sMessenger.sendMessage("begin_turn,"+this.getCharacter());
 	}
 	
-	void endTurn() {
+	void endTurn() throws Exception {
+		//this.deactivate();
 		
-		game.endTurnRequest(this);
+		view.cMessenger.sendMessage("end_turn,"+this.character);
+		//switch to the next player
+		//playerTurn = (playerTurn+1)%users.size();
+		
+		//start the next player's turn
+		
+		//startNewTurn();
+		//game.endTurnRequest(this);
 	}
 	
 	void beginTurn() throws Exception {		
@@ -93,8 +105,13 @@ public class User {
 	}
 	}
 	
-	void makeAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom){
-		game.handleAccusation(accusedCharacter, accusedWeapon, accusedRoom, this);
+	void makeAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom) {
+		try {
+			game.handleAccusation(accusedCharacter, accusedWeapon, accusedRoom, this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	void makeSuggestion(String suggestedCharacter, String suggestedWeapon, String suggestedRoom) {

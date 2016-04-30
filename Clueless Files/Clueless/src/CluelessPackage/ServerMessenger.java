@@ -13,6 +13,7 @@ public class ServerMessenger {
 	static String IP;
 	static int port;
 	static int playerCount;
+	public static Game game;
     public static ArrayList<ConnectionThread> connectedClients;
     
     static class ConnectionThread extends Thread {
@@ -75,9 +76,16 @@ public class ServerMessenger {
                     		playerCount--;
                     		return ;
                     	} 
-                    	if (args_incoming.get(0).equals("req_valid_moves")) {
-                    		//System.out.println("Received request from " + args_incoming.get(1) + " for valid moves.");
-                    		//System.out.println("Valid moves sent.");
+                    	if (args_incoming.get(0).equals("end_turn")) {
+                    		System.out.println("Received request from " + args_incoming.get(1) + " to end turn.");
+                    		User t = null;
+                    		for (int i = 0; i < game.users.size(); i++) {
+                    			if (game.users.get(i).getCharacter().equals(args_incoming.get(1))) {
+                    				t = game.users.get(i);
+                    				break;
+                    			}
+                    		}
+                    		game.endTurnRequest(t);
                     	} 
                     	else {
                     		if (Users == null && args_incoming.get(0).equals("init")) {
@@ -256,7 +264,7 @@ public class ServerMessenger {
         System.out.println("Clueless Game Initialized");
 
         // let Game initialize on player list
-		Game game = Game.getGame();
+		game = Game.getGame();
 		game.initialize(Users);
 		Game.getGame().selectFirstPlayer();
         // end change

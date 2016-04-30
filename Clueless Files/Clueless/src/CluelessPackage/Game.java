@@ -227,7 +227,7 @@ public class Game {
 		
 	}
 
-	void handleAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom, User user) {
+	void handleAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom, User user) throws Exception {
 		systemChat.sendSystemMessage(user +" is suggesting" +accusedCharacter +" in the "+ accusedRoom + " with the " +accusedWeapon+":");
 		if (hypothesisIsCorrect(accusedCharacter, accusedWeapon, accusedRoom )){
 			

@@ -2,6 +2,7 @@ package CluelessPackage;
 
 
 
+import java.awt.Component;
 import javax.swing.JFrame;  
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -19,9 +20,12 @@ import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 
 public class UserUI extends JFrame {
 
@@ -322,8 +326,7 @@ private UserUI thisUI = this;
                 helpButton.setBounds(594, 500, 180, 50);
                 helpButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                        JOptionPane.showMessageDialog(contentPane,
-                        "help here");
+                        helpEvent();
                     }
                 
                 });
@@ -477,4 +480,68 @@ private UserUI thisUI = this;
 		this.chatDisplay = chatDisplay;
 		
 	}
+        
+        public void helpEvent() {
+
+            JTabbedPane tabbedPane = new JTabbedPane();
+            JComponent panel1 = makeTextPanel1();
+            tabbedPane.add("Rules",panel1);
+            
+            JDialog jd = new JDialog();
+            jd.add(tabbedPane);
+            jd.setBounds(0,0,600,800);
+            jd.setVisible(true);
+            
+
+            
+            
+
+        }
+        
+        protected JComponent makeTextPanel1() {
+            
+            JPanel panel = new JPanel(false);
+            String text1 = "Clue Game Rules \n \n" ;
+            String text2 = "Number of Players : 3 - 6 \n\n"
+                    + "Goal: Correctly name the murderer, murder weapon, and murder location \n\n"
+                    + "9 Rooms, 12 Hallways, 2 Secret Passges \n\n"
+                    + "The cards contain 6 suspects, six weapons, and 9 rooms \n"
+                    + "\n"
+                    + "At the beginning of the game, a guilty person, weapon, and room \n"
+                    + "are selected by the game randomly and the remaining cards are \n"
+                    + "distributed evenly to the players \n\n"
+                    + "Make sure to pay attention to what cards are in your hand\n"
+                    + "Because they are in your hand, your cards could not have\n"
+                    + "been involved in the crime!\n\n"
+                    
+                    + "Miss Scarlet is first and players turns moves clockwise from there \n"
+                    + "On your turn, move about the game board\n"
+                    + "In this version there are limited movements \n\n"
+                    + "Movements are as follows: \n"
+                    + "- Allowed a single move per turn \n"
+                    + "- Must be in a room to make a suggestion \n"
+                    + "- Can only use secret passage ways in rooms where it is available \n"
+                    + "- If both hallways are blocked and there is no secret passageway, \n"
+                    + "  the only move you can make is an accusation\n\n"
+                    + "Making a Suggestion: \n"
+                    + "- You must make suggestions to figure out the crime information\n"
+                    + "- Suggestions can only include the room you are currently in\n"
+                    + "- If you want to make a second suggestion, you must\n"
+                    + " leave and then re-enter the room\n"
+                    + "- Each player will have the chance to dissprove a suggestion\n\n"
+                    + "Making an Accusation: \n"
+                    + "- Each player can only make on accusation the entire game\n"
+                    + "- Can be in any room to manke an accusation\n"
+                    + "- If accusation is correct, that player wins the game\n"
+                    + "- If accusation is incorrect, that player is out\n";
+                   
+            
+            JTextArea filler = new JTextArea();
+            filler.setAlignmentX(Component.CENTER_ALIGNMENT);
+            filler.append(text1);
+            filler.append(text2);
+ 
+            panel.add(filler);
+            return panel;
+        }
 }

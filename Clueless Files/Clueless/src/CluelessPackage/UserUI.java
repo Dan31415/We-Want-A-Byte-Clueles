@@ -108,13 +108,11 @@ private UserUI thisUI = this;
 				cardDisplay.setBounds(354, 589, 174, 185);
 				contentPane.add(cardDisplay);
 				
-				LocationButton location20 = new LocationButton("Hall", 20);
-				location20.setBounds(440, 440, 100, 100);
-				locationButtonList.add(location20);
+
 			panel.setLayout(null);
 			
 			//Add all of the location buttons to a list.
-			LocationButton location0 = new LocationButton("Conservatory", 0);
+			LocationButton location0 = new LocationButton("Study", 0);
 			location0.setBounds(0, 0, 100, 100);
 			locationButtonList.add(location0);
 			panel.add(location0);
@@ -124,7 +122,7 @@ private UserUI thisUI = this;
 			locationButtonList.add(location1);
 			panel.add(location1);
 			
-			LocationButton location2 = new LocationButton("Billiard Room", 2);
+			LocationButton location2 = new LocationButton("Hall", 2);
 			location2.setBounds(220, 0, 100, 100);
 			locationButtonList.add(location2);
 			panel.add(location2);
@@ -134,7 +132,7 @@ private UserUI thisUI = this;
 			locationButtonList.add(location3);
 			panel.add(location3);
 			
-			LocationButton location4 = new LocationButton("Library", 4);
+			LocationButton location4 = new LocationButton("Lounge", 4);
 			location4.setBounds(440, 0, 100, 100);
 			locationButtonList.add(location4);
 			panel.add(location4);
@@ -154,7 +152,7 @@ private UserUI thisUI = this;
 			locationButtonList.add(location7);
 			panel.add(location7);
 			
-			LocationButton location8 = new LocationButton("Ballroom", 8);
+			LocationButton location8 = new LocationButton("Library", 8);
 			location8.setBounds(0, 220, 100, 100);
 			locationButtonList.add(location8);
 			panel.add(location8);
@@ -164,7 +162,7 @@ private UserUI thisUI = this;
 				locationButtonList.add(location9);
 				panel.add(location9);
 			
-			LocationButton location10 = new LocationButton("Stairway", 10);
+			LocationButton location10 = new LocationButton("Billiard Room", 10);
 			location10.setBounds(220, 220, 100, 100);
 			locationButtonList.add(location10);
 			panel.add(location10);
@@ -174,7 +172,7 @@ private UserUI thisUI = this;
 			locationButtonList.add(location11);
 			panel.add(location11);
 			
-			LocationButton location12 = new LocationButton("Hall", 12);
+			LocationButton location12 = new LocationButton("Dining Room", 12);
 			location12.setBounds(440, 220, 100, 100);
 			locationButtonList.add(location12);
 			panel.add(location12);
@@ -194,7 +192,7 @@ private UserUI thisUI = this;
 			locationButtonList.add(location15);
 			panel.add(location15);
 			
-			LocationButton location16 = new LocationButton("Kitchen", 16);
+			LocationButton location16 = new LocationButton("Conservatory", 16);
 			location16.setBounds(0, 440, 100, 100);
 			locationButtonList.add(location16);
 			panel.add(location16);
@@ -204,7 +202,7 @@ private UserUI thisUI = this;
 			locationButtonList.add(location17);
 			panel.add(location17);
 			
-			LocationButton location18 = new LocationButton("Dining Room", 18);
+			LocationButton location18 = new LocationButton("Ball Room", 18);
 			location18.setBounds(220, 440, 100, 100);
 			locationButtonList.add(location18);
 			panel.add(location18);
@@ -213,7 +211,12 @@ private UserUI thisUI = this;
 			location19.setBounds(330, 480, 100, 20);
 			locationButtonList.add(location19);
 			panel.add(location19);
+                        
+                        LocationButton location20 = new LocationButton("Kitchen", 20);
+			location20.setBounds(440, 440, 100, 100);
+			locationButtonList.add(location20);
 			panel.add(location20);
+                        
 		contentPane.add(panel);
 		
 		

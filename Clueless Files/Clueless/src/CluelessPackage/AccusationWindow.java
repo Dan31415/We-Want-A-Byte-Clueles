@@ -1,15 +1,17 @@
 package CluelessPackage;
 
-import javax.swing.JFrame;
+import javax.swing.JFrame; 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 
 public class AccusationWindow extends JFrame {
 
@@ -19,11 +21,18 @@ public class AccusationWindow extends JFrame {
 	private static final long serialVersionUID = -2823691096941989424L;
 
 	private JPanel contentPane;
-	private JTextField characterTextField;
-	private JTextField weaponTextField;
-	private JTextField roomTextField;
 	private UserUI UI;
 	JButton btnAccuse;
+	AccusationWindow frame;
+	
+	JComboBox characterComboBox;
+	String[] characters = { "Miss Scarlet","Professor Plum","Col Mustard","Mrs. Peacock","Mr. Green","Mrs. White"};
+	
+	JComboBox weaponComboBox;
+	String[] weapons = { "Candlestick","Dagger","Lead Pipe","Revolver","Rope","Spanner"};
+	
+	JComboBox roomComboBox;
+	String[] rooms = { "Conservatory","Billiard Room","Library","Ballroom","Stairway","Hall1","Kitchen","Dining Room","Hall2"};
 	/**
 	 * Launch the application.
 	 
@@ -57,43 +66,33 @@ public class AccusationWindow extends JFrame {
 		lblYouveMadeAnd.setBounds(154, 27, 300, 14);
 		contentPane.add(lblYouveMadeAnd);
 		
-		JLabel lblbutThisDoesnt = new JLabel("(but this doesnt do anything yet)");
-		lblbutThisDoesnt.setBounds(154, 79, 300, 14);
-		contentPane.add(lblbutThisDoesnt);
-		
 		JLabel characterLabel = new JLabel("Character");
-		characterLabel.setBounds(57, 126, 58, 14);
+		characterLabel.setBounds(61, 72, 58, 14);
 		contentPane.add(characterLabel);
 		
 		JLabel weaponLabel = new JLabel("Weapon");
-		weaponLabel.setBounds(194, 126, 58, 14);
+		weaponLabel.setBounds(198, 72, 58, 14);
 		contentPane.add(weaponLabel);
 		
 		JLabel roomLabel = new JLabel("Room");
-		roomLabel.setBounds(336, 126, 58, 14);
+		roomLabel.setBounds(379, 72, 58, 14);
 		contentPane.add(roomLabel);
 		
-		characterTextField = new JTextField();
-		characterTextField.setText("");
-		characterTextField.setBounds(39, 151, 86, 20);
-		contentPane.add(characterTextField);
-		characterTextField.setColumns(10);
-		
-		weaponTextField = new JTextField();
-		weaponTextField.setText("");
-		weaponTextField.setColumns(10);
-		weaponTextField.setBounds(166, 151, 97, 20);
-		contentPane.add(weaponTextField);
-		
-		roomTextField = new JTextField();
-		roomTextField.setText("");
-		roomTextField.setColumns(10);
-		roomTextField.setBounds(308, 151, 86, 20);
-		contentPane.add(roomTextField);
-		
 		btnAccuse = new JButton("ACCUSE!");
-		btnAccuse.setBounds(174, 199, 89, 23);
+		btnAccuse.setBounds(137, 155, 162, 23);
 		contentPane.add(btnAccuse);
+		
+		characterComboBox = new JComboBox(characters);
+		characterComboBox.setBounds(10, 97, 134, 20);
+		contentPane.add(characterComboBox);
+		
+		weaponComboBox = new JComboBox(weapons);
+		weaponComboBox.setBounds(154, 97, 145, 20);
+		contentPane.add(weaponComboBox);
+		
+		roomComboBox = new JComboBox (rooms);
+		roomComboBox.setBounds(309, 97, 149, 20);
+		contentPane.add(roomComboBox);
 		//btnAccuse.addActionListener(new AccusationWindowListener(this));
 		
 		btnAccuse.addActionListener(new ActionListener() {
@@ -111,34 +110,34 @@ public class AccusationWindow extends JFrame {
 			}
 		});
 		
-		AccusationWindow frame = this;
+		frame = this;
 		frame.setVisible(true);
 		}
 		
 		void updateTextFields() {
-			characterTextField.validate();
-			weaponTextField.validate();
-			roomTextField.validate();
+			characterComboBox.validate();
+			weaponComboBox.validate();
+			roomComboBox.validate();
 		}
 
 		String getCharacter() {
-			return characterTextField.getText();
+			return characterComboBox.getSelectedItem().toString();
 		}
 		
 		String getWeapon() {
-			return weaponTextField.getText();
+			return weaponComboBox.getSelectedItem().toString();
 		}
 		
 		String getRoom() {
-			return roomTextField.getText();
+			return roomComboBox.getSelectedItem().toString();
 		}
 
 		void passOnAccusation(String character, String weapon, String room) throws Exception {
 			UI.passOnAccusation(character, weapon, room);
-			
 			setVisible(false);
 			dispose();
 		
 	}
 
+	
 }

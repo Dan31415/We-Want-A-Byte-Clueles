@@ -60,7 +60,10 @@ public class User {
 		view.deactivateAllButtonsExceptChat();
 		isUserTurn = false;
 	}
-
+	void sendDeactivateMove(){
+		sMessenger.sendMessage("deactivateMovement");
+	}
+	
 	void sendBeginTurn() {
 		sMessenger.sendMessage("begin_turn,"+this.getCharacter());
 	}
@@ -94,9 +97,11 @@ public class User {
 		//return gameboard.getValidMoves(user);
 	}
 	
-	void moveTo(int i){
-		game.requestMoverTo(this, i);
-		view.deactivateMovement();
+	void moveTo(int i) throws Exception{
+		//game.requestMoverTo(this, i);
+		view.cMessenger.sendMessage("move,"+this.character+","+i);
+		gameBoard.moveUserTo(this, i);
+		//view.deactivateMovement();
 	}
 	
 	void mustMakeSuggestion() {

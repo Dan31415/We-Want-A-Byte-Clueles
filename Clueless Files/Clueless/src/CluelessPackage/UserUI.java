@@ -232,7 +232,12 @@ public class UserUI extends JFrame {
 		for (LocationButton b: locationButtonList){
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					moveRequest(b.locationNumber);
+					try {
+						moveRequest(b.locationNumber);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			});
 		}
@@ -398,8 +403,9 @@ public class UserUI extends JFrame {
 	}
 
 
-	 void moveRequest(int location) { // called by button clicked on 
+	 void moveRequest(int location) throws Exception { // called by button clicked on 
 		user.moveTo(location); //msg to server (move,gerard,library)
+		//cMessenger.sendMessage("move,"+this.user.getCharacter()+","+location);
 		
 	}
 

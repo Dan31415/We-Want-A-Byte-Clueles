@@ -94,7 +94,26 @@ public class ClientMessenger {
                         	 		System.out.println("Player " + data.get(1) + " has joined.");
                         	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");
                         	 		attachedUserUI.addPlayer(data.get(1), "FILL IN HERE");
+                        	 		break; // not handling with new game-on-server implementation, but keep JIC
+                        	 	case "startgame" :
+                        	 		// simple command, but will kick off a bunch/chain of events on client side
+                        	 		System.out.println("Start game transmission received:");
+                        	 		attachedUserUI.userChat.postMessage("WELCOME to a new game... Let's start.");
                         	 		break;
+                        	 	case "deactivate" :
+                        	 		attachedUserUI.user.deactivate();
+                        	 		break;
+                        	 	case "begin_turn" : // will look like "beginTurn,character_name"
+                        	 		if (attachedUserUI.user.getCharacter().equals(data.get(1))) {
+                        	 			attachedUserUI.user.beginTurn();
+                        	 		}
+                        	 		break;
+                        	 	case "init_view" :
+                        	 		attachedUserUI.user.initializeView();
+                        	 		break;
+                        	 	case "exit":
+                        	 		System.out.println("Exiting...");
+                        	 		return;
                         	 	default : System.out.println("Received generic message");
                         	 		break;
                         	 }
@@ -109,7 +128,10 @@ public class ClientMessenger {
                          System.err.println("Could not connect to " + ServerMessengerIP);
                      } catch (IOException e) {
                          System.err.println("Could not shake hands with port " + ServerMessengerPort);
-                     }
+                     } catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                  }
             }
        }

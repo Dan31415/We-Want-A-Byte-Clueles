@@ -48,8 +48,8 @@ public class UserUI extends JFrame {
 	private ArrayList<JLabel> userlabels;
 	private ArrayList<JTextField> userLocations;
 	public ClientMessenger cMessenger;
-private UserUI thisUI = this;
-	private User user;
+	private UserUI thisUI = this;
+	public User user;
 	private JTextField chatEntry;
 	private int playersDrawn;
 	/**
@@ -341,7 +341,12 @@ private UserUI thisUI = this;
 		contentPane.add(lblNotePad);
 		endTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				endTurnRequested();
+				try {
+					endTurnRequested();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
                 
@@ -399,12 +404,12 @@ private UserUI thisUI = this;
 	}
 
 
-	 void moveRequest(int location) {
-		user.moveTo(location);
+	 void moveRequest(int location) { // called by button clicked on 
+		user.moveTo(location); //msg to server (move,gerard,library)
 		
 	}
 
-	 void endTurnRequested() {
+	 void endTurnRequested() throws Exception {
 		user.endTurn();
 		
 	}
@@ -415,7 +420,7 @@ private UserUI thisUI = this;
 		
 	}
 
-	 void passOnAccusation(String character, String weapon, String room) {
+	 void passOnAccusation(String character, String weapon, String room) throws Exception {
 		user.makeAccusation(character, weapon, room);
 	}
 	

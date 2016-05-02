@@ -19,6 +19,7 @@ import java.awt.Font;
 import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -270,20 +271,20 @@ public class UserUI extends JFrame {
 		
 		userlabels = new ArrayList<JLabel> ();
 		
-		JLabel user1Label = new JLabel("Player 1");
+		JLabel user1Label = new JLabel("");
 		user1Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		user1Label.setBounds(562, 259, 169, 14);
 		contentPane.add(user1Label);
 		userlabels.add(user1Label);
 		
 		
-		JLabel user2Label = new JLabel("Player 2");
+		JLabel user2Label = new JLabel("");
 		user2Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		user2Label.setBounds(562, 304, 169, 14);
 		contentPane.add(user2Label);
 		userlabels.add(user2Label);
 		
-		JLabel user3Label = new JLabel("Player 3");
+		JLabel user3Label = new JLabel("");
 		user3Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		user3Label.setBounds(562, 344, 169, 14);
 		contentPane.add(user3Label);
@@ -316,6 +317,7 @@ public class UserUI extends JFrame {
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Chatboard.getChatboard().sendUserMessage(user.username, chatEntry.getText() );
+				chatEntry.setText("");
 			}
 		});
 		btnSend.setBounds(117, 768, 89, 23);
@@ -552,4 +554,7 @@ public class UserUI extends JFrame {
             panel.add(filler);
             return panel;
         }
+        
+       
+        
 }

@@ -121,6 +121,9 @@ public class ClientMessenger {
                         	 			
                         	 	//	}
                         	 		break;
+                        	 	case "position" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.setPlayerLocation(Integer.parseInt(data.get(1)), data.get(2));
+                        	 		break;
                         	 	case "exit":
                         	 		System.out.println("Exiting...");
                         	 		return;

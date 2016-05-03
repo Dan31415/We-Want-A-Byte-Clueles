@@ -67,7 +67,9 @@ public class User {
 	void sendBeginTurn() {
 		sMessenger.sendMessage("begin_turn,"+this.getCharacter());
 	}
-	
+	void sendPosition(int player, String location){
+		sMessenger.sendMessage("position,"+player+","+location);
+	}
 	void endTurn() throws Exception {
 		//this.deactivate();
 		
@@ -148,7 +150,7 @@ public class User {
 	void updatePlayerPositionsView() {
 		for (int i = 0; i < game.users.size() ; i++){
 		//	view.setPlayerLocation(i, game.requestLocationOfPlayer(i)); // needed to be commented out since we dont have access to User view
-			
+			sendPosition(i, game.requestLocationOfPlayer(i));
 		}
 	}
 		

@@ -115,11 +115,22 @@ public class ClientMessenger {
                         	 	case "deactivateMovement" : 
                         	 		
                         	 		attachedUserUI.deactivateMovement();
-                        	 		//if (attachedUserUI.user.getCharacter().equals(data.get(1))) {
+                        	 		
+                        	 		break;
+                        	 	case "move" : 
+                        	 		//int PlayerID =0;
+                        	 		
+                        	 			//for (int i =0; i<attachedUserUI.getLabels().size(); i++){
+                        	 				
+                        	 				//System.out.println("player label is " + attachedUserUI.getLabels().get(i));
+                        	 			//	System.out.println("player label name " + attachedUserUI.user.username+" ("+attachedUserUI.user.character+")");
+                        	 			//	if (attachedUserUI.getLabels().get(i).equals(attachedUserUI.user.username+" ("+attachedUserUI.user.character+")") ) {
+                        	 			//		PlayerID =i;
+                        	 			//	}
+                        	 				//System.out.println("player id is" + PlayerID);
+                        	 				//attachedUserUI.setPlayerLocation(PlayerID,data.get(2));
                         	 			
-                        	 			//attachedUserUI.user.moveTo(Integer.parseInt(data.get(2)));
-                        	 			
-                        	 	//	}
+                        	 			//}
                         	 		break;
                         	 	case "position" : // looks like "position,user_int, location"
                         	 		attachedUserUI.setPlayerLocation(Integer.parseInt(data.get(1)), data.get(2));

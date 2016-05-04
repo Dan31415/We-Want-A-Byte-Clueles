@@ -310,6 +310,7 @@ public class GameBoard {
 		userLocations.put(user, new Integer(moveTo));
 
 		// detects if the user had just moved into a room
+		System.out.println("before must make suggestion");
 		if (userIsInARoom(user) && user.isInTheGame) {
 			user.mustMakeSuggestion();
 		}

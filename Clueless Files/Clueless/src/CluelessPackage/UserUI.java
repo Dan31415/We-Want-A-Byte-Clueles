@@ -412,8 +412,8 @@ public class UserUI extends JFrame {
 
 
 	 void moveRequest(int location) throws Exception { // called by button clicked on 
-		user.moveTo(location); //msg to server (move,gerard,library)
-		//cMessenger.sendMessage("move,"+this.user.getCharacter()+","+location);
+		//user.moveTo(location); //msg to server (move,gerard,library)
+		cMessenger.sendMessage("move,"+this.user.getCharacter()+","+location);
 		
 	}
 
@@ -446,7 +446,9 @@ public class UserUI extends JFrame {
 		userLocations.get(i).setText(location);
 		
 	}
-
+	 ArrayList<JTextField> getLabels(){
+		 return userLocations;
+	 }
 	 void deactivateAccusationButton() {
 		accusationButton.setEnabled(false);
 		

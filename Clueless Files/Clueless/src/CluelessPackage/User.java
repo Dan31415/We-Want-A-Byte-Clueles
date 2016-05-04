@@ -11,6 +11,7 @@ public class User {
 	
 	String username;
 	String character;
+
 	private UserUI view;
 	boolean isInTheGame;
 	ArrayList<String> cards;
@@ -101,8 +102,9 @@ public class User {
 	
 	void moveTo(int i) throws Exception{
 		//game.requestMoverTo(this, i);
-		view.cMessenger.sendMessage("move,"+this.character+","+i);
-		gameBoard.moveUserTo(this, i);
+		
+		sMessenger.sendMessage("move,"+this.getCharacter()+","+i);
+		
 		//view.deactivateMovement();
 	}
 	

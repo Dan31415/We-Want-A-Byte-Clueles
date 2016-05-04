@@ -266,8 +266,9 @@ public class Game {
 		}
 
 		 void requestMoverTo(User user, int i) {
-			gameboard.moveUserTo(user, i);
+			
 			user.sendDeactivateMove();
+			gameboard.moveUserTo(user, i);
 		
 			
 		}

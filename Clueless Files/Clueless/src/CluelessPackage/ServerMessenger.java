@@ -90,13 +90,17 @@ public class ServerMessenger {
                     	if (args_incoming.get(0).equals("move")) {
                     		System.out.println("Received request from " + args_incoming.get(1) + " to move to " +args_incoming.get(2) );
                     		User t = null;
+                    		
                     		for (int i = 0; i < game.users.size(); i++) {
                     			if (game.users.get(i).getCharacter().equals(args_incoming.get(1))) {
                     				t = game.users.get(i);
+                    				System.out.println(t);
                     				break;
                     			}
                     		}
                     		game.requestMoverTo(t,Integer.parseInt(args_incoming.get(2)));
+                    		t.moveTo(Integer.parseInt(args_incoming.get(2)));
+                    		
                     	} 
                     	else {
                     		if (Users == null && args_incoming.get(0).equals("init")) {
@@ -223,7 +227,13 @@ public class ServerMessenger {
                 } catch (IOException e) {
                     e.printStackTrace();
                     return ;
-                }
+                } catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
     }

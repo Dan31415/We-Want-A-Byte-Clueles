@@ -21,11 +21,18 @@ private ArrayList<UserUI> UIs = new ArrayList<UserUI>();
 }
 
 	 void sendSystemMessage(String string) {
-		postMessage("SYSTEM MESSAGE: "+string);
+		String t_message = "SYSTEM MESSAGE: " + string;
+		//send to server
+		try {
+			UIs.get(0).cMessenger.sendMessage("chat,"+t_message);
+		}
+		catch (Exception e) {
+			System.out.println("Could not send message to server");
+		}
 		
 	}
 
-	private void postMessage(String string) {
+	void postMessage(String string) {
 		for (UserUI ui :UIs ){
 			ui.addChatLine(string);
 		}
@@ -37,7 +44,16 @@ private ArrayList<UserUI> UIs = new ArrayList<UserUI>();
 		
 	}
 	 void sendUserMessage(String username, String string) {
-		postMessage(username+": "+string);
+		String t_message = username + ": " + string;
+		//send to server
+		try {
+			UIs.get(0).cMessenger.sendMessage("chat,"+t_message);
+		}
+		catch (Exception e) {
+			//System.out.println("Could not send message to server");
+		}
+			
+		//postMessage(username+": "+string); // onus is now on ClientMessenger
 		
 	}
 }

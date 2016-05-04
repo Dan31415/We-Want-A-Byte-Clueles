@@ -1,9 +1,7 @@
 package CluelessPackage;
 
-
-
-
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JTextArea; 
 
@@ -18,13 +16,14 @@ public class Game {
 	private Chatboard systemChat;
 	private Deck deck;
 	private GameBoard gameboard; 
-	
+	private static String username;
+	public ServerMessenger sMessenger;
 	/**
 	 * This class implements the singleton pattern for global access.
 	 */
 	private static Game thisGame = null;
 	
-	private Game(){
+	private Game() {
 		systemChat= Chatboard.getChatboard();
 		deck = Deck.getDeck();
 		gameboard = GameBoard.getBoard();
@@ -40,14 +39,25 @@ public class Game {
 	
 	/**
 	 * Adds new users. Just a stand-in for the dynamic joining for now.
+	 * @throws Exception 
 	 */
-	 void initialize() {
-		//Make 3 new users
-		users.add(new User("Dan", "Miss Scarlet"));
-		users.add(new User("Nabil", "Professor Plum"));
-		users.add(new User("Amanda", "Mrs. Peacock"));
+	 void initialize(ArrayList<Map<String, Map<String, String>>> players) throws Exception {
+		 this.sMessenger = sMessenger;
+		//Make as many new users as have joined
+		 for (int i = 0; i < players.size(); i++) {
+			 for (String key : players.get(i).keySet()) {
+				 for (String key2 : players.get(i).get(key).keySet()) {
+					 users.add(new User(key2, players.get(i).get(key).get(key2), true));
+				 }
+			 }
+		 }
+		
+		//users.add(new User("Dan", "Miss Scarlet"));
+		//users.add(new User("Nabil", "Professor Plum"));
+		//users.add(new User("Amanda", "Mrs. Peacock"));
 		
 		//put them on the board
+		 //sMessenger.sendMessage("start_loc");
 		gameboard.putUserOnStartingLocation(this.users);
 		
 		//determine the cards that go in the envelope
@@ -63,11 +73,13 @@ public class Game {
 		
 		//set-up the users' UIs
 		for (User u: users){
-			u.initializeView();
+			u.sendInitializeView();
 		}
 		
 		//send system message saying the games has started
-		systemChat.sendSystemMessage("WELCOME to a new game... Let's start.");
+		//systemChat.sendSystemMessage("WELCOME to a new game... Let's start.");
+		sMessenger = new ServerMessenger();
+		sMessenger.sendMessage("startgame");
 		
 		//get the game going.
 		startNewTurn();
@@ -114,14 +126,14 @@ public class Game {
 		//activate the next player. First check if they are "out" (i.e. they made a wrong accusation). If so, skip them. Otherwise, 
 		//start their turn.
 		if (users.get(playerTurn).isInTheGame){
-		users.get(playerTurn).beginTurn();
+		users.get(playerTurn).sendBeginTurn();
 		}
 		else{endTurnRequest(users.get(playerTurn));
 		}
 		
 		//Send a system message so everyone knows whose turn it is.
-		systemChat.sendSystemMessage("it is now "+users.get(playerTurn).username+"'s turn.");
-		
+		//systemChat.sendSystemMessage("it is now "+users.get(playerTurn).username+"'s turn.");
+		sMessenger.sendMessage("chat,"+"it is now "+users.get(playerTurn).username+"'s turn.");
 				
 	}
 
@@ -131,13 +143,15 @@ public class Game {
 	 */
 	void endTurnRequest(User user) {
 		
-		//turn off all buttons (excpet for chat)
-		user.deactivate();	
+		//turn off all buttons (except for chat)
+		//user.deactivate();	
+		user.sendDeactivate();
 		
 		//switch to the next player
 		playerTurn = (playerTurn+1)%users.size();
 		
 		//start the next player's turn
+		
 		startNewTurn();
 		
 	}
@@ -213,7 +227,7 @@ public class Game {
 		
 	}
 
-	void handleAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom, User user) {
+	void handleAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom, User user) throws Exception {
 		systemChat.sendSystemMessage(user +" is suggesting" +accusedCharacter +" in the "+ accusedRoom + " with the " +accusedWeapon+":");
 		if (hypothesisIsCorrect(accusedCharacter, accusedWeapon, accusedRoom )){
 			
@@ -246,14 +260,15 @@ public class Game {
 				return false;
 			}
 	}
-
+		
 		 int[] requestValidMoves(User user) {
 			return gameboard.getValidMoves(user);
-			
 		}
 
 		 void requestMoverTo(User user, int i) {
 			gameboard.moveUserTo(user, i);
+			user.sendDeactivateMove();
+		
 			
 		}
 

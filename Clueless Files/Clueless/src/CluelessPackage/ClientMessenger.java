@@ -16,16 +16,27 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            ServerMessengerIP = "96.255.149.87";
+            ServerMessengerIP = "108.31.213.246";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
             new ConnectionThread().start();
         }
 
-        public void sendMessage(String p_message) throws Exception {
+        public void sendMessage(String p_message) throws Exception { // takes in "," separated string
         	transmit_message = p_message;
-        	System.out.println("Attempting to transmit chat: '" + transmit_message + "' to server");
+        	ArrayList<String> t_data = convertToData(transmit_message);
+        	if (t_data.get(0) == "chat") { // if we are trying to send out a chat message...
+        		System.out.println("Attempting to transmit chat: '" + transmit_message + "' to server");
+        	}
+        	switch (t_data.get(0)) {
+            case "chat": System.out.println("Attempting to transmit chat: '" + transmit_message + "' to server");
+                     break;
+            case "init": System.out.println("Attempting to transmit connection initialization to server");
+                     break;
+            default: System.out.println("Template message");
+                     break;
+        }
             os.println(transmit_message); //writeBytes(transmit_message);
             os.flush();
         }
@@ -61,18 +72,65 @@ public class ClientMessenger {
                  }
                  
                  String str_incoming;
+                 String header;
                  ArrayList<String> data;
                  
                  if (serverPort != null && os != null && is != null) {
                      try {
                          while (true) {
                         	 str_incoming = buffin.readLine(); // parse the incoming data
-                        	 if (str_incoming.indexOf("chat") != -1) {
-                        		 // we know chat transmission looks like "chat, [MESSAGE]", so parse accordingly
-                        		 data = convertToData(str_incoming);
-                        		 System.out.println("Chat transmission received:" + data.get(1));
-                        		 attachedUserUI.userChat.postMessage(data.get(1));
+                        	 data = convertToData(str_incoming);
+                        	 header = data.get(0);
+                        	 switch (header) {
+                        	 	case "chat" : 
+                        	 		// we know chat transmission looks like "chat,[MESSAGE]", so parse accordingly
+                        	 		data = convertToData(str_incoming);
+                        	 		System.out.println("Chat transmission received:" + data.get(1));
+                        	 		attachedUserUI.userChat.postMessage(data.get(1));
+                        	 		break;
+                        	 	case "init" :
+                        	 		// we know init transmission looks like "init,username", so parse accordingly
+                        	 		data = convertToData(str_incoming);
+                        	 		System.out.println("Player " + data.get(1) + " has joined.");
+                        	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");
+                        	 		attachedUserUI.addPlayer(data.get(1), attachedUserUI.user.getCharacter());
+                        	 		break; // not handling with new game-on-server implementation, but keep JIC
+                        	 	case "startgame" :
+                        	 		// simple command, but will kick off a bunch/chain of events on client side
+                        	 		System.out.println("Start game transmission received:");
+                        	 		attachedUserUI.userChat.postMessage("WELCOME to a new game... Let's start.");
+                        	 		break;
+                        	 	case "deactivate" :
+                        	 		attachedUserUI.user.deactivate();
+                        	 		break;
+                        	 	case "begin_turn" : // will look like "beginTurn,character_name"
+                        	 		if (attachedUserUI.user.getCharacter().equals(data.get(1))) {
+                        	 			attachedUserUI.user.beginTurn();
+                        	 		}
+                        	 		break;
+                        	 	case "init_view" :
+                        	 		attachedUserUI.user.initializeView();
+                        	 		break;
+                        	 	
+                        	 	case "deactivateMovement" : 
+                        	 		
+                        	 		attachedUserUI.deactivateMovement();
+                        	 		//if (attachedUserUI.user.getCharacter().equals(data.get(1))) {
+                        	 			
+                        	 			//attachedUserUI.user.moveTo(Integer.parseInt(data.get(2)));
+                        	 			
+                        	 	//	}
+                        	 		break;
+                        	 	case "position" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.setPlayerLocation(Integer.parseInt(data.get(1)), data.get(2));
+                        	 		break;
+                        	 	case "exit":
+                        	 		System.out.println("Exiting...");
+                        	 		return;
+                        	 	default : System.out.println("Received generic message");
+                        	 		break;
                         	 }
+                        	 
                          }
 
                          /*os.close();
@@ -83,7 +141,10 @@ public class ClientMessenger {
                          System.err.println("Could not connect to " + ServerMessengerIP);
                      } catch (IOException e) {
                          System.err.println("Could not shake hands with port " + ServerMessengerPort);
-                     }
+                     } catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                  }
             }
        }

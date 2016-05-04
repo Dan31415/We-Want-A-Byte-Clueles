@@ -50,7 +50,7 @@ private ArrayList<UserUI> UIs = new ArrayList<UserUI>();
 			UIs.get(0).cMessenger.sendMessage("chat,"+t_message);
 		}
 		catch (Exception e) {
-			System.out.println("Could not send message to server");
+			//System.out.println("Could not send message to server");
 		}
 			
 		//postMessage(username+": "+string); // onus is now on ClientMessenger

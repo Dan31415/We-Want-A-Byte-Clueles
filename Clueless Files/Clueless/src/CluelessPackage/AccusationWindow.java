@@ -102,7 +102,12 @@ public class AccusationWindow extends JFrame {
 				String character = getCharacter();
 				String weapon = getWeapon();;
 				String room = getRoom();
-				passOnAccusation(character, weapon, room);
+				try {
+					passOnAccusation(character, weapon, room);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -128,7 +133,7 @@ public class AccusationWindow extends JFrame {
 			return roomTextField.getText();
 		}
 
-		void passOnAccusation(String character, String weapon, String room) {
+		void passOnAccusation(String character, String weapon, String room) throws Exception {
 			UI.passOnAccusation(character, weapon, room);
 			
 			setVisible(false);

@@ -116,107 +116,128 @@ public class UserUI extends JFrame {
 			panel.setLayout(null);
 			
 			//Add all of the location buttons to a list.
-			LocationButton location0 = new LocationButton("Study", 0);
+			LocationButton location0 = new LocationButton("Study(0)", 0);
+			location0.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location0.setBounds(0, 0, 100, 100);
 			locationButtonList.add(location0);
 			panel.add(location0);
 			
-			LocationButton location1 = new LocationButton("", 1);
-			location1.setBounds(110, 40, 100, 20);
+			LocationButton location1 = new LocationButton("(1)", 1);
+			location1.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location1.setBounds(110, 29, 100, 35);
 			locationButtonList.add(location1);
 			panel.add(location1);
 			
-			LocationButton location2 = new LocationButton("Hall", 2);
+			LocationButton location2 = new LocationButton("Hall(2)", 2);
+			location2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location2.setBounds(220, 0, 100, 100);
 			locationButtonList.add(location2);
 			panel.add(location2);
 			
-			LocationButton location3 = new LocationButton("",3);
-			location3.setBounds(330, 40, 100, 20);
+			LocationButton location3 = new LocationButton("(3)",3);
+			location3.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location3.setBounds(330, 29, 100, 35);
 			locationButtonList.add(location3);
 			panel.add(location3);
 			
-			LocationButton location4 = new LocationButton("Lounge", 4);
+			LocationButton location4 = new LocationButton("Lounge(4)", 4);
+			location4.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location4.setBounds(440, 0, 100, 100);
 			locationButtonList.add(location4);
 			panel.add(location4);
 			
-			LocationButton location5 = new LocationButton("", 5);
-			location5.setBounds(40, 110, 20, 100);
+			LocationButton location5 = new LocationButton("(5)", 5);
+			location5.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location5.setBounds(21, 110, 51, 100);
 			locationButtonList.add(location5);
 			panel.add(location5);
 			
-			LocationButton location6 = new LocationButton("", 6);
-			location6.setBounds(260, 110, 20, 100);
+			LocationButton location6 = new LocationButton("(6)", 6);
+			location6.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location6.setBounds(246, 110, 51, 100);
 			locationButtonList.add(location6);
 			panel.add(location6);
 			
-			LocationButton location7 = new LocationButton("", 7);
-			location7.setBounds(480, 110, 20, 100);
+			LocationButton location7 = new LocationButton("(7)", 7);
+			location7.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location7.setBounds(460, 110, 58, 100);
 			locationButtonList.add(location7);
 			panel.add(location7);
 			
-			LocationButton location8 = new LocationButton("Library", 8);
+			LocationButton location8 = new LocationButton("Library(8)", 8);
+			location8.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location8.setBounds(0, 220, 100, 100);
 			locationButtonList.add(location8);
 			panel.add(location8);
 			
-				LocationButton location9 = new LocationButton("", 9);
-				location9.setBounds(110, 260, 100, 20);
+				LocationButton location9 = new LocationButton("(9)", 9);
+				location9.setFont(new Font("Tahoma", Font.PLAIN, 9));
+				location9.setBounds(110, 253, 100, 35);
 				locationButtonList.add(location9);
 				panel.add(location9);
 			
-			LocationButton location10 = new LocationButton("Billiard Room", 10);
+			LocationButton location10 = new LocationButton("Billiards (10)", 10);
+			location10.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location10.setBounds(220, 220, 100, 100);
 			locationButtonList.add(location10);
 			panel.add(location10);
 			
-			LocationButton location11 = new LocationButton("", 11);
-			location11.setBounds(330, 260, 100, 20);
+			LocationButton location11 = new LocationButton("(11)", 11);
+			location11.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location11.setBounds(330, 253, 100, 35);
 			locationButtonList.add(location11);
 			panel.add(location11);
 			
-			LocationButton location12 = new LocationButton("Dining Room", 12);
+			LocationButton location12 = new LocationButton("Dining(12)", 12);
+			location12.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location12.setBounds(440, 220, 100, 100);
 			locationButtonList.add(location12);
 			panel.add(location12);
 			
-			LocationButton location13 = new LocationButton("", 13);
-			location13.setBounds(40, 330, 20, 100);
+			LocationButton location13 = new LocationButton("(13)", 13);
+			location13.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location13.setBounds(21, 330, 51, 100);
 			locationButtonList.add(location13);
 			panel.add(location13);
 			
-			LocationButton location14 = new LocationButton("", 14);
-			location14.setBounds(260, 330, 20, 100);
+			LocationButton location14 = new LocationButton("(14)", 14);
+			location14.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location14.setBounds(246, 330, 51, 100);
 			locationButtonList.add(location14);
 			panel.add(location14);
 			
-			LocationButton location15 = new LocationButton("", 15);
-			location15.setBounds(480, 330, 20, 100);
+			LocationButton location15 = new LocationButton("(15)", 15);
+			location15.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location15.setBounds(460, 330, 58, 100);
 			locationButtonList.add(location15);
 			panel.add(location15);
 			
-			LocationButton location16 = new LocationButton("Conservatory", 16);
-			location16.setBounds(0, 440, 100, 100);
+			LocationButton location16 = new LocationButton("Conservatory(16)", 16);
+			location16.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			location16.setBounds(0, 440, 127, 100);
 			locationButtonList.add(location16);
 			panel.add(location16);
 			
-			LocationButton location17 = new LocationButton("", 17);
-			location17.setBounds(110, 480, 100, 20);
+			LocationButton location17 = new LocationButton("(17)", 17);
+			location17.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location17.setBounds(137, 465, 73, 40);
 			locationButtonList.add(location17);
 			panel.add(location17);
 			
-			LocationButton location18 = new LocationButton("Ball Room", 18);
+			LocationButton location18 = new LocationButton("Ball Room(18)", 18);
+			location18.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location18.setBounds(220, 440, 100, 100);
 			locationButtonList.add(location18);
 			panel.add(location18);
 			
-			LocationButton location19 = new LocationButton("", 19);
-			location19.setBounds(330, 480, 100, 20);
+			LocationButton location19 = new LocationButton("(19)", 19);
+			location19.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location19.setBounds(330, 465, 100, 40);
 			locationButtonList.add(location19);
 			panel.add(location19);
                         
-                        LocationButton location20 = new LocationButton("Kitchen", 20);
+            LocationButton location20 = new LocationButton("Kitchen(20)", 20);
+            location20.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location20.setBounds(440, 440, 100, 100);
 			locationButtonList.add(location20);
 			panel.add(location20);

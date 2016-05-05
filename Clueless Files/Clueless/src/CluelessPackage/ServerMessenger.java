@@ -87,6 +87,10 @@ public class ServerMessenger {
                     		}
                     		game.endTurnRequest(t);
                     	} 
+                    	if (args_incoming.get(0).equals("pass_on_suggestion")) {
+                    		System.out.println("Received request to make suggestion from " + args_incoming.get(4));
+                    		game.handleSuggestion(args_incoming.get(1),args_incoming.get(2),args_incoming.get(3), args_incoming.get(4));
+                    	} 
                     	if (args_incoming.get(0).equals("move")) {
                     		System.out.println("Received request from " + args_incoming.get(1) + " to move to " +args_incoming.get(2) );
                     		User t = null;

@@ -178,16 +178,23 @@ public class Game {
 		
 	}
 
+	void handleSuggestion(String suggestedCharacter, String suggestedWeapon, String suggestedRoom, String suggestingUser) {
+		for (User u : users) {
+			if (u.getCharacter().equals(suggestingUser)) {
+				handleSuggestion(suggestedCharacter, suggestedWeapon, suggestedRoom, u);
+			}
+		}
+	}
 
 	 void handleSuggestion(String suggestedCharacter, String suggestedWeapon, String suggestedRoom, User suggestingUser) {
 		 
-		 JTextArea suggestingUserTextArea = suggestingUser.getUserUI().getChatDisplay();
-		 String userText = suggestingUserTextArea.getText();
+		 //JTextArea suggestingUserTextArea = suggestingUser.getUserUI().getChatDisplay();
+		 //String userText = suggestingUserTextArea.getText();
 		 
 		 systemChat.sendSystemMessage(suggestingUser.username +" is suggesting " +suggestedCharacter +" in the "+ suggestedRoom + " with the " +suggestedWeapon+":");
 		 
-		 suggestingUser.getUserUI().setChatDisplayText("");
-		 suggestingUser.getUserUI().setChatDisplayText(userText);
+		 //suggestingUser.getUserUI().setChatDisplayText("");
+		 //suggestingUser.getUserUI().setChatDisplayText(userText);
 		 
 		 GameBoard b = gameboard;
 		 
@@ -204,7 +211,9 @@ public class Game {
 		
 		//go through the cards of each user. If a match is found with the suggestion, record the matching card and user.
 		for (User u: users){
+			System.out.println("Checking for cards from user " + u.getCharacter());
 			for(String c: u.cards){
+				System.out.println(c);
 				if (c.equals(suggestedCharacter)){
 				matchingUser = u;
 				matchingCard = suggestedCharacter;
@@ -226,11 +235,12 @@ public class Game {
 		}
 		else{
 			//send success message to users
-			System.out.println("card " +matchingCard +"was found");
+			System.out.println("card " +matchingCard +" was found");
 			
 			//send message to all that a match was found with player "matchingUser"
 			systemChat.sendSystemMessage(matchingUser.username +" has responded to the request.");
-			suggestingUser.notifySuggestionSuccess(matchingCard, matchingUser);
+			sMessenger.sendMessage("notify_suggestion,"+matchingCard+","+matchingUser+","+suggestingUser.character);
+			//suggestingUser.notifySuggestionSuccess(matchingCard, matchingUser);
 		}
 		
 		//update the user positions since a user may have been moved during the suggestion.

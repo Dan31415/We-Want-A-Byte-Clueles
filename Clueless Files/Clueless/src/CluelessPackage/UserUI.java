@@ -3,6 +3,7 @@ package CluelessPackage;
 
 
 import java.awt.Component;
+
 import javax.swing.JFrame;  
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -21,9 +22,9 @@ import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -57,6 +58,7 @@ public class UserUI extends JFrame {
 	private JTextField player4loc;
 	private JTextField player5loc;
 	private JTextField player6loc;
+	public ArrayList<User> fake_users;
 	/**
 	 * Launch the application.
 	 
@@ -79,6 +81,7 @@ public class UserUI extends JFrame {
 	 * @throws Exception 
 	 */
 	UserUI(User user) throws Exception {
+		fake_users = new ArrayList<User>();
 		Chatboard.getChatboard().addUI(this);
 		this.user = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -521,8 +524,8 @@ public class UserUI extends JFrame {
 		user.makeAccusation(character, weapon, room);
 	}
 	
-	 void passOnSuggestion(String character, String weapon, String room) {
-		
+	 void passOnSuggestion(String character, String weapon, String room) throws Exception {
+		cMessenger.sendMessage("pass_on_suggestion,"+character+","+weapon+","+room+","+user.getCharacter());
 		user.makeSuggestion(character, weapon, room);
 	}
 

@@ -62,6 +62,7 @@ public class Game {
 		
 		//determine the cards that go in the envelope
 		murderer = deck.drawCharacter();
+		System.out.println(murderer);
 		murderWeapon = deck.drawWeapon();
 		murderRoom= deck.drawRoom();
 		

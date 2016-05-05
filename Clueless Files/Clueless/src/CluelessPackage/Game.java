@@ -86,7 +86,7 @@ public class Game {
 		
 		//get the game going.
 		startNewTurn();
-		sMessenger.sendMessage("chat,"+"the murderer is " +murderer + " the murder weapon is " +murderWeapon+" the murder room is " +murderRoom );
+		sMessenger.sendMessage("chat,"+"the murderer is " +murderer+ " the murder weapon is " +murderWeapon+" the murder room is " +murderRoom );
 		
 			
 		}
@@ -255,9 +255,7 @@ public class Game {
 		}
 	}
 		private boolean hypothesisIsCorrect(String accusedCharacter, String accusedWeapon, String accusedRoom) {
-			if (murderer.equals(accusedCharacter) &&
-					murderWeapon.equals(accusedWeapon) &&
-					murderRoom.equals(accusedRoom)){
+			if (murderer.equals(accusedCharacter) && murderWeapon.equals(accusedWeapon) && murderRoom.equals(accusedRoom)){
 					return true;
 			}
 			else{

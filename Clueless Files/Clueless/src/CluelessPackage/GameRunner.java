@@ -39,7 +39,7 @@ public class GameRunner {
 				// initialize user, gameboard (?) on client end
 				// hard coding these in... Gerard and Elaine can't play at same time
 				String t_char;
-				switch (args[0])   {
+				switch (args[0]){
 			      case "Dan":
 			    	  t_char = "Miss Scarlet";
 			    	  break;
@@ -65,6 +65,7 @@ public class GameRunner {
 			    	  t_char = "Bad input";
 			    	  break;
 				}
+				
 				User u = new User(args[0], t_char, false);
 				
 			}

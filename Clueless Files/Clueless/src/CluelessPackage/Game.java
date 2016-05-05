@@ -86,7 +86,7 @@ public class Game {
 		
 		//get the game going.
 		startNewTurn();
-		sMessenger.sendMessage("chat,"+"the murderer is " +murderer + ", the murder weapon is " +murderWeapon+", the murder room is " +murderRoom );
+		sMessenger.sendMessage("chat,"+"the murderer is " +murderer + " the murder weapon is " +murderWeapon+" the murder room is " +murderRoom );
 		
 			
 		}

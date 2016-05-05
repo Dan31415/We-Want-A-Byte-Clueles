@@ -98,6 +98,19 @@ public class ServerMessenger {
                     		}
                     		game.requestMoverTo(t,Integer.parseInt(args_incoming.get(2)));
                     	} 
+                    	if (args_incoming.get(0).equals("game_won")) {
+                    		System.out.println("Game over, someone won");
+                    		for (int i = 0; i < connectedClients.size(); i++) {
+                    			try {
+                    				connectedClients.get(i).sendMessage("chat,"+"Game won");
+									connectedClients.get(i).sendMessage(str_incoming);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+                    			//out.println(str_incoming + "\n\r");
+                    			//out.flush();
+                    		}
+                    	} 
                     	else {
                     		if (Users == null && args_incoming.get(0).equals("init")) {
                     			TreeMap n = new TreeMap();
@@ -245,7 +258,7 @@ public class ServerMessenger {
         ServerSocket serverPort = null;
         Socket socket = null;
         port = 3000;
-        IP = "108.31.213.246";
+        IP = "96.255.149.87";
         playerCount = 0;
         System.out.println("Clueless Server Process Initialized");
         connectedClients = new ArrayList<ConnectionThread>();

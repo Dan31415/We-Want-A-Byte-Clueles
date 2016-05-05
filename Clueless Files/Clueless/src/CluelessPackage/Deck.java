@@ -79,6 +79,7 @@ public class Deck {
 		characterCards.trimToSize();
 		int i = randomGenerator.nextInt(characterCards.size()-1);
 		return characterCards.remove(i);
+		
 	}
 	
 	String drawWeapon() {

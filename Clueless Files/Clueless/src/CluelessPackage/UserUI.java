@@ -53,6 +53,9 @@ public class UserUI extends JFrame {
 	public User user;
 	private JTextField chatEntry;
 	private int playersDrawn;
+	private JTextField player4loc;
+	private JTextField player5loc;
+	private JTextField player6loc;
 	/**
 	 * Launch the application.
 	 
@@ -257,7 +260,7 @@ public class UserUI extends JFrame {
 		
 		userLocations = new ArrayList<JTextField>();
 		JTextField player1loc = new JTextField();
-		player1loc.setBounds(741, 256, 33, 20);
+		player1loc.setBounds(741, 270, 33, 20);
 		contentPane.add(player1loc);
 		player1loc.setColumns(10);
 		userLocations.add(player1loc);
@@ -274,11 +277,29 @@ public class UserUI extends JFrame {
 		contentPane.add(player3loc);
 		userLocations.add(player3loc);
 		
+		player4loc = new JTextField();
+		player4loc.setColumns(10);
+		player4loc.setBounds(741, 383, 33, 20);
+		contentPane.add(player4loc);
+		userLocations.add(player4loc);
+		
+		player5loc = new JTextField();
+		player5loc.setColumns(10);
+		player5loc.setBounds(741, 414, 33, 20);
+		contentPane.add(player5loc);
+		userLocations.add(player5loc);
+		
+		player6loc = new JTextField();
+		player6loc.setColumns(10);
+		player6loc.setBounds(741, 454, 33, 20);
+		contentPane.add(player6loc);
+		userLocations.add(player6loc);
+		
 		userlabels = new ArrayList<JLabel> ();
 		
 		JLabel user1Label = new JLabel("");
 		user1Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		user1Label.setBounds(562, 259, 169, 14);
+		user1Label.setBounds(562, 270, 169, 14);
 		contentPane.add(user1Label);
 		userlabels.add(user1Label);
 		
@@ -346,6 +367,23 @@ public class UserUI extends JFrame {
 		JLabel lblNotePad = new JLabel("Note Pad");
 		lblNotePad.setBounds(652, 564, 97, 14);
 		contentPane.add(lblNotePad);
+		
+		JLabel label = new JLabel("");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		label.setBounds(562, 389, 169, 14);
+		contentPane.add(label);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		label_1.setBounds(562, 414, 169, 14);
+		contentPane.add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		label_2.setBounds(562, 454, 169, 14);
+		contentPane.add(label_2);
+		
+		
 		endTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -374,6 +412,9 @@ public class UserUI extends JFrame {
 	void addPlayer(String username, String character) {
 		userlabels.get(playersDrawn).setText(username+" ("+character+")");
 		playersDrawn ++;
+		for(JLabel label: userlabels){
+			label.repaint();
+		}
 	}
 	
 	void deactivateAllButtonsExceptChat() {
@@ -443,10 +484,18 @@ public class UserUI extends JFrame {
 	}
 
 	 void setPlayerLocation(int i, String location) {
-		userLocations.get(i).setText(location);
-		
+		userLocations.get(i).setText(location);		
+	}
+	 
+	 /*void setPlayerLocation2(String characterName, String location) {
+		for (int i = 0; i<userlabels.size(); i++){
+			if(userlabels.get(i).getText().contains(characterName)){
+			userLocations.get(i).setText(locationToString);
+			}
+		}
 	}
 
+*/
 	 void deactivateAccusationButton() {
 		accusationButton.setEnabled(false);
 		
@@ -504,7 +553,7 @@ public class UserUI extends JFrame {
             tabbedPane.add("Rules",panel1);
             
             JDialog jd = new JDialog();
-            jd.add(tabbedPane);
+            jd.getContentPane().add(tabbedPane);
             jd.setBounds(0,0,600,800);
             jd.setVisible(true);
             
@@ -560,7 +609,4 @@ public class UserUI extends JFrame {
             panel.add(filler);
             return panel;
         }
-        
-       
-        
 }

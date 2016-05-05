@@ -368,20 +368,23 @@ public class UserUI extends JFrame {
 		lblNotePad.setBounds(652, 564, 97, 14);
 		contentPane.add(lblNotePad);
 		
-		JLabel label = new JLabel("");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		label.setBounds(562, 389, 169, 14);
-		contentPane.add(label);
+		JLabel user4label = new JLabel("");
+		user4label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		user4label.setBounds(562, 389, 169, 14);
+		contentPane.add(user4label);
+		userlabels.add(user4label);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		label_1.setBounds(562, 414, 169, 14);
-		contentPane.add(label_1);
+		JLabel user5label = new JLabel("");
+		user5label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		user5label.setBounds(562, 414, 169, 14);
+		contentPane.add(user5label);
+		userlabels.add(user5label);
 		
-		JLabel label_2 = new JLabel("");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		label_2.setBounds(562, 454, 169, 14);
-		contentPane.add(label_2);
+		JLabel user6label = new JLabel("");
+		user6label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		user6label.setBounds(562, 454, 169, 14);
+		contentPane.add(user6label);
+		userlabels.add(user6label);
 		
 		
 		endTurnButton.addActionListener(new ActionListener() {

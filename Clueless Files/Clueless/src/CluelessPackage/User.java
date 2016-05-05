@@ -15,7 +15,7 @@ public class User {
 	boolean isInTheGame;
 	ArrayList<String> cards;
 	private Game game;
-	//private GameBoard board;
+	private GameBoard board;
 	private boolean isUserTurn;
 	public GameBoard gameBoard;
 	public ServerMessenger sMessenger;

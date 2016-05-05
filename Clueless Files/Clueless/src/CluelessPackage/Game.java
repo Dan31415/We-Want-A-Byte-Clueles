@@ -248,6 +248,7 @@ public class Game {
 		else{
 			//send message that user is out of the game.
 			systemChat.sendSystemMessage("The accusation was wrong. " +user.username +" has lost.");
+			user.getUserUI().deactivateAllButtonsExceptChat();
 			user.isOutOfTheGame();
 			user.moveTo(0);
 			user.endTurn();

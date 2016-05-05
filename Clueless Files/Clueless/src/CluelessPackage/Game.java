@@ -10,9 +10,9 @@ public class Game {
 	ArrayList<User> users = new ArrayList<User>();
 	//Within the "users" array, this stores the index of the player whose turn it currently is.
 	int playerTurn;
-	private String murderer;
-	private String murderWeapon;
-	private String murderRoom;
+	public String murderer;
+	public String murderWeapon;
+	public String murderRoom;
 	private Chatboard systemChat;
 	private Deck deck;
 	private GameBoard gameboard; 
@@ -84,9 +84,14 @@ public class Game {
 		sMessenger = new ServerMessenger();
 		sMessenger.sendMessage("startgame");
 		
+		sMessenger.sendMessage("set_murderer,"+murderer);
+		sMessenger.sendMessage("set_murder_weapon,"+murderWeapon);
+		sMessenger.sendMessage("set_murder_room,"+murderRoom);
+
+		
 		//get the game going.
 		startNewTurn();
-		sMessenger.sendMessage("chat,"+"the murderer is " +murderer + " the murder weapon is " +murderWeapon+" the murder room is " +murderRoom );
+		sMessenger.sendMessage("chat,"+"the murderer is " +murderer+ " the murder weapon is " +murderWeapon+" the murder room is " +murderRoom );
 		
 			
 		}
@@ -233,11 +238,14 @@ public class Game {
 
 	void handleAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom, User user) throws Exception {
 		systemChat.sendSystemMessage(user +" is accusing " +accusedCharacter +" in the "+ accusedRoom + " with the " +accusedWeapon+":");
+		//System.out.println("LOOK" + user.getUserUI().user.game.murderer);
+		
 		if (hypothesisIsCorrect(accusedCharacter, accusedWeapon, accusedRoom )){
 			
 			///send message that game is over
 			systemChat.sendSystemMessage("The accusation was correct: " +user.username +"has won the game!");
-			
+			sMessenger.sendMessage("game_won");
+
 			//disable everyone's buttons except for chat
 			for (User u : users){
 				u.deactivate();
@@ -248,6 +256,7 @@ public class Game {
 		else{
 			//send message that user is out of the game.
 			systemChat.sendSystemMessage("The accusation was wrong. " +user.username +" has lost.");
+			user.getUserUI().deactivateAllButtonsExceptChat();
 			user.isOutOfTheGame();
 			user.moveTo(0);
 			user.endTurn();
@@ -255,9 +264,7 @@ public class Game {
 		}
 	}
 		private boolean hypothesisIsCorrect(String accusedCharacter, String accusedWeapon, String accusedRoom) {
-			if (murderer.equals(accusedCharacter) &&
-					murderWeapon.equals(accusedWeapon) &&
-					murderRoom.equals(accusedRoom)){
+			if (murderer.equals(accusedCharacter) && murderWeapon.equals(accusedWeapon) && murderRoom.equals(accusedRoom)){
 					return true;
 			}
 			else{

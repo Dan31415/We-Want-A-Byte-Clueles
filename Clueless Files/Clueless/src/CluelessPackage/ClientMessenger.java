@@ -121,8 +121,20 @@ public class ClientMessenger {
                         	 			
                         	 	//	}
                         	 		break;
+                        	 	case "set_murderer" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.user.game.murderer = data.get(1);
+                        	 		break;
+                        	 	case "set_murder_room" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.user.game.murderRoom = data.get(1);
+                        	 		break;
+                        	 	case "set_murder_weapon" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.user.game.murderWeapon = data.get(1);
+                        	 		break;
                         	 	case "position" : // looks like "position,user_int, location"
                         	 		attachedUserUI.setPlayerLocation(Integer.parseInt(data.get(1)), data.get(2));
+                        	 		break;
+                        	 	case "game_won" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.deactivateAllButtonsExceptChat();
                         	 		break;
                         	 	case "exit":
                         	 		System.out.println("Exiting...");

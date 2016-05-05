@@ -14,8 +14,8 @@ public class User {
 	private UserUI view;
 	boolean isInTheGame;
 	ArrayList<String> cards;
-	private Game game;
-	//private GameBoard board;
+	public Game game;
+	private GameBoard board;
 	private boolean isUserTurn;
 	public GameBoard gameBoard;
 	public ServerMessenger sMessenger;

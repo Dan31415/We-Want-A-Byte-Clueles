@@ -2,6 +2,7 @@ package CluelessPackage;
 
 
 
+import java.awt.Component;
 import javax.swing.JFrame;  
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -18,10 +19,14 @@ import java.awt.Font;
 import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 
 public class UserUI extends JFrame {
 
@@ -48,6 +53,9 @@ public class UserUI extends JFrame {
 	public User user;
 	private JTextField chatEntry;
 	private int playersDrawn;
+	private JTextField player4loc;
+	private JTextField player5loc;
+	private JTextField player6loc;
 	/**
 	 * Launch the application.
 	 
@@ -104,13 +112,11 @@ public class UserUI extends JFrame {
 				cardDisplay.setBounds(354, 589, 174, 185);
 				contentPane.add(cardDisplay);
 				
-				LocationButton location20 = new LocationButton("Hall", 20);
-				location20.setBounds(440, 440, 100, 100);
-				locationButtonList.add(location20);
+
 			panel.setLayout(null);
 			
 			//Add all of the location buttons to a list.
-			LocationButton location0 = new LocationButton("Conservatory", 0);
+			LocationButton location0 = new LocationButton("Study", 0);
 			location0.setBounds(0, 0, 100, 100);
 			locationButtonList.add(location0);
 			panel.add(location0);
@@ -120,7 +126,7 @@ public class UserUI extends JFrame {
 			locationButtonList.add(location1);
 			panel.add(location1);
 			
-			LocationButton location2 = new LocationButton("Billiard Room", 2);
+			LocationButton location2 = new LocationButton("Hall", 2);
 			location2.setBounds(220, 0, 100, 100);
 			locationButtonList.add(location2);
 			panel.add(location2);
@@ -130,7 +136,7 @@ public class UserUI extends JFrame {
 			locationButtonList.add(location3);
 			panel.add(location3);
 			
-			LocationButton location4 = new LocationButton("Library", 4);
+			LocationButton location4 = new LocationButton("Lounge", 4);
 			location4.setBounds(440, 0, 100, 100);
 			locationButtonList.add(location4);
 			panel.add(location4);
@@ -150,7 +156,7 @@ public class UserUI extends JFrame {
 			locationButtonList.add(location7);
 			panel.add(location7);
 			
-			LocationButton location8 = new LocationButton("Ballroom", 8);
+			LocationButton location8 = new LocationButton("Library", 8);
 			location8.setBounds(0, 220, 100, 100);
 			locationButtonList.add(location8);
 			panel.add(location8);
@@ -160,7 +166,7 @@ public class UserUI extends JFrame {
 				locationButtonList.add(location9);
 				panel.add(location9);
 			
-			LocationButton location10 = new LocationButton("Stairway", 10);
+			LocationButton location10 = new LocationButton("Billiard Room", 10);
 			location10.setBounds(220, 220, 100, 100);
 			locationButtonList.add(location10);
 			panel.add(location10);
@@ -170,7 +176,7 @@ public class UserUI extends JFrame {
 			locationButtonList.add(location11);
 			panel.add(location11);
 			
-			LocationButton location12 = new LocationButton("Hall", 12);
+			LocationButton location12 = new LocationButton("Dining Room", 12);
 			location12.setBounds(440, 220, 100, 100);
 			locationButtonList.add(location12);
 			panel.add(location12);
@@ -190,7 +196,7 @@ public class UserUI extends JFrame {
 			locationButtonList.add(location15);
 			panel.add(location15);
 			
-			LocationButton location16 = new LocationButton("Kitchen", 16);
+			LocationButton location16 = new LocationButton("Conservatory", 16);
 			location16.setBounds(0, 440, 100, 100);
 			locationButtonList.add(location16);
 			panel.add(location16);
@@ -200,7 +206,7 @@ public class UserUI extends JFrame {
 			locationButtonList.add(location17);
 			panel.add(location17);
 			
-			LocationButton location18 = new LocationButton("Dining Room", 18);
+			LocationButton location18 = new LocationButton("Ball Room", 18);
 			location18.setBounds(220, 440, 100, 100);
 			locationButtonList.add(location18);
 			panel.add(location18);
@@ -209,7 +215,12 @@ public class UserUI extends JFrame {
 			location19.setBounds(330, 480, 100, 20);
 			locationButtonList.add(location19);
 			panel.add(location19);
+                        
+                        LocationButton location20 = new LocationButton("Kitchen", 20);
+			location20.setBounds(440, 440, 100, 100);
+			locationButtonList.add(location20);
 			panel.add(location20);
+                        
 		contentPane.add(panel);
 		
 		
@@ -232,7 +243,12 @@ public class UserUI extends JFrame {
 		for (LocationButton b: locationButtonList){
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					moveRequest(b.locationNumber);
+					try {
+						moveRequest(b.locationNumber);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			});
 		}
@@ -244,7 +260,7 @@ public class UserUI extends JFrame {
 		
 		userLocations = new ArrayList<JTextField>();
 		JTextField player1loc = new JTextField();
-		player1loc.setBounds(741, 256, 33, 20);
+		player1loc.setBounds(741, 270, 33, 20);
 		contentPane.add(player1loc);
 		player1loc.setColumns(10);
 		userLocations.add(player1loc);
@@ -261,22 +277,40 @@ public class UserUI extends JFrame {
 		contentPane.add(player3loc);
 		userLocations.add(player3loc);
 		
+		player4loc = new JTextField();
+		player4loc.setColumns(10);
+		player4loc.setBounds(741, 383, 33, 20);
+		contentPane.add(player4loc);
+		userLocations.add(player4loc);
+		
+		player5loc = new JTextField();
+		player5loc.setColumns(10);
+		player5loc.setBounds(741, 414, 33, 20);
+		contentPane.add(player5loc);
+		userLocations.add(player5loc);
+		
+		player6loc = new JTextField();
+		player6loc.setColumns(10);
+		player6loc.setBounds(741, 454, 33, 20);
+		contentPane.add(player6loc);
+		userLocations.add(player6loc);
+		
 		userlabels = new ArrayList<JLabel> ();
 		
-		JLabel user1Label = new JLabel("Player 1");
+		JLabel user1Label = new JLabel("");
 		user1Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		user1Label.setBounds(562, 259, 169, 14);
+		user1Label.setBounds(562, 270, 169, 14);
 		contentPane.add(user1Label);
 		userlabels.add(user1Label);
 		
 		
-		JLabel user2Label = new JLabel("Player 2");
+		JLabel user2Label = new JLabel("");
 		user2Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		user2Label.setBounds(562, 304, 169, 14);
 		contentPane.add(user2Label);
 		userlabels.add(user2Label);
 		
-		JLabel user3Label = new JLabel("Player 3");
+		JLabel user3Label = new JLabel("");
 		user3Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		user3Label.setBounds(562, 344, 169, 14);
 		contentPane.add(user3Label);
@@ -309,6 +343,7 @@ public class UserUI extends JFrame {
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Chatboard.getChatboard().sendUserMessage(user.username, chatEntry.getText() );
+				chatEntry.setText("");
 			}
 		});
 		btnSend.setBounds(117, 768, 89, 23);
@@ -322,8 +357,7 @@ public class UserUI extends JFrame {
                 helpButton.setBounds(594, 500, 180, 50);
                 helpButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                        JOptionPane.showMessageDialog(contentPane,
-                        "help here");
+                        helpEvent();
                     }
                 
                 });
@@ -333,6 +367,23 @@ public class UserUI extends JFrame {
 		JLabel lblNotePad = new JLabel("Note Pad");
 		lblNotePad.setBounds(652, 564, 97, 14);
 		contentPane.add(lblNotePad);
+		
+		JLabel label = new JLabel("");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		label.setBounds(562, 389, 169, 14);
+		contentPane.add(label);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		label_1.setBounds(562, 414, 169, 14);
+		contentPane.add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		label_2.setBounds(562, 454, 169, 14);
+		contentPane.add(label_2);
+		
+		
 		endTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -361,6 +412,9 @@ public class UserUI extends JFrame {
 	void addPlayer(String username, String character) {
 		userlabels.get(playersDrawn).setText(username+" ("+character+")");
 		playersDrawn ++;
+		for(JLabel label: userlabels){
+			label.repaint();
+		}
 	}
 	
 	void deactivateAllButtonsExceptChat() {
@@ -398,8 +452,9 @@ public class UserUI extends JFrame {
 	}
 
 
-	 void moveRequest(int location) { // called by button clicked on 
+	 void moveRequest(int location) throws Exception { // called by button clicked on 
 		user.moveTo(location); //msg to server (move,gerard,library)
+		//cMessenger.sendMessage("move,"+this.user.getCharacter()+","+location);
 		
 	}
 
@@ -429,10 +484,18 @@ public class UserUI extends JFrame {
 	}
 
 	 void setPlayerLocation(int i, String location) {
-		userLocations.get(i).setText(location);
-		
+		userLocations.get(i).setText(location);		
+	}
+	 
+	 /*void setPlayerLocation2(String characterName, String location) {
+		for (int i = 0; i<userlabels.size(); i++){
+			if(userlabels.get(i).getText().contains(characterName)){
+			userLocations.get(i).setText(locationToString);
+			}
+		}
 	}
 
+*/
 	 void deactivateAccusationButton() {
 		accusationButton.setEnabled(false);
 		
@@ -482,4 +545,68 @@ public class UserUI extends JFrame {
 		this.chatDisplay = chatDisplay;
 		
 	}
+        
+        public void helpEvent() {
+
+            JTabbedPane tabbedPane = new JTabbedPane();
+            JComponent panel1 = makeTextPanel1();
+            tabbedPane.add("Rules",panel1);
+            
+            JDialog jd = new JDialog();
+            jd.getContentPane().add(tabbedPane);
+            jd.setBounds(0,0,600,800);
+            jd.setVisible(true);
+            
+
+            
+            
+
+        }
+        
+        protected JComponent makeTextPanel1() {
+            
+            JPanel panel = new JPanel(false);
+            String text1 = "Clue Game Rules \n \n" ;
+            String text2 = "Number of Players : 3 - 6 \n\n"
+                    + "Goal: Correctly name the murderer, murder weapon, and murder location \n\n"
+                    + "9 Rooms, 12 Hallways, 2 Secret Passges \n\n"
+                    + "The cards contain 6 suspects, six weapons, and 9 rooms \n"
+                    + "\n"
+                    + "At the beginning of the game, a guilty person, weapon, and room \n"
+                    + "are selected by the game randomly and the remaining cards are \n"
+                    + "distributed evenly to the players \n\n"
+                    + "Make sure to pay attention to what cards are in your hand\n"
+                    + "Because they are in your hand, your cards could not have\n"
+                    + "been involved in the crime!\n\n"
+                    
+                    + "Miss Scarlet is first and players turns moves clockwise from there \n"
+                    + "On your turn, move about the game board\n"
+                    + "In this version there are limited movements \n\n"
+                    + "Movements are as follows: \n"
+                    + "- Allowed a single move per turn \n"
+                    + "- Must be in a room to make a suggestion \n"
+                    + "- Can only use secret passage ways in rooms where it is available \n"
+                    + "- If both hallways are blocked and there is no secret passageway, \n"
+                    + "  the only move you can make is an accusation\n\n"
+                    + "Making a Suggestion: \n"
+                    + "- You must make suggestions to figure out the crime information\n"
+                    + "- Suggestions can only include the room you are currently in\n"
+                    + "- If you want to make a second suggestion, you must\n"
+                    + " leave and then re-enter the room\n"
+                    + "- Each player will have the chance to dissprove a suggestion\n\n"
+                    + "Making an Accusation: \n"
+                    + "- Each player can only make on accusation the entire game\n"
+                    + "- Can be in any room to manke an accusation\n"
+                    + "- If accusation is correct, that player wins the game\n"
+                    + "- If accusation is incorrect, that player is out\n";
+                   
+            
+            JTextArea filler = new JTextArea();
+            filler.setAlignmentX(Component.CENTER_ALIGNMENT);
+            filler.append(text1);
+            filler.append(text2);
+ 
+            panel.add(filler);
+            return panel;
+        }
 }

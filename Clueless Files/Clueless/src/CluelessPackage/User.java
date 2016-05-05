@@ -15,7 +15,7 @@ public class User {
 	boolean isInTheGame;
 	ArrayList<String> cards;
 	private Game game;
-	//private GameBoard board;
+	private GameBoard board;
 	private boolean isUserTurn;
 	public GameBoard gameBoard;
 	public ServerMessenger sMessenger;
@@ -60,11 +60,16 @@ public class User {
 		view.deactivateAllButtonsExceptChat();
 		isUserTurn = false;
 	}
-
+	void sendDeactivateMove(){
+		sMessenger.sendMessage("deactivateMovement");
+	}
+	
 	void sendBeginTurn() {
 		sMessenger.sendMessage("begin_turn,"+this.getCharacter());
 	}
-	
+	void sendPosition(int player, String location){
+		sMessenger.sendMessage("position,"+player+","+location);
+	}
 	void endTurn() throws Exception {
 		//this.deactivate();
 		
@@ -94,9 +99,11 @@ public class User {
 		//return gameboard.getValidMoves(user);
 	}
 	
-	void moveTo(int i){
-		game.requestMoverTo(this, i);
-		view.deactivateMovement();
+	void moveTo(int i) throws Exception{
+		//game.requestMoverTo(this, i);
+		view.cMessenger.sendMessage("move,"+this.character+","+i);
+		gameBoard.moveUserTo(this, i);
+		//view.deactivateMovement();
 	}
 	
 	void mustMakeSuggestion() {
@@ -143,7 +150,7 @@ public class User {
 	void updatePlayerPositionsView() {
 		for (int i = 0; i < game.users.size() ; i++){
 		//	view.setPlayerLocation(i, game.requestLocationOfPlayer(i)); // needed to be commented out since we dont have access to User view
-			
+			sendPosition(i, game.requestLocationOfPlayer(i));
 		}
 	}
 		

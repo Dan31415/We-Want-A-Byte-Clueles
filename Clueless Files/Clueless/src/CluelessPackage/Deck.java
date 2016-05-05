@@ -75,18 +75,25 @@ public class Deck {
  * modified: 4/20/16, Adam Turbiville, changed get to remove to remove solution from deck
  */
 	String drawCharacter() {
+		
+		characterCards.trimToSize();
 		int i = randomGenerator.nextInt(characterCards.size()-1);
 		return characterCards.remove(i);
+		
 	}
 	
 	String drawWeapon() {
+		weaponCards.trimToSize();
 		int i = randomGenerator.nextInt(weaponCards.size()-1);
 		return weaponCards.remove(i);
 	}
 	
 	String drawRoom() {
+		
+		roomCards.trimToSize();
 		int i = randomGenerator.nextInt(roomCards.size()-1);
 		return roomCards.remove(i);
+		
 	}
 
 	void combineDecks() {

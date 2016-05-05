@@ -68,6 +68,7 @@ public class GameBoard {
 		ArrayList<Location> links = new ArrayList<Location>();
 		links.add(boardLocations.get(1));
 		links.add(boardLocations.get(5));
+		links.add(boardLocations.get(20));
 		boardLocations.get(0).addLinks(links);
 		links.clear();
 
@@ -89,6 +90,7 @@ public class GameBoard {
 
 		links.add(boardLocations.get(3));
 		links.add(boardLocations.get(7));
+		links.add(boardLocations.get(16));
 		boardLocations.get(4).addLinks(links);
 		links.clear();
 
@@ -138,6 +140,7 @@ public class GameBoard {
 
 		links.add(boardLocations.get(8));
 		links.add(boardLocations.get(16));
+		links.add(boardLocations.get(4));
 		boardLocations.get(13).addLinks(links);
 		links.clear();
 
@@ -174,6 +177,7 @@ public class GameBoard {
 
 		links.add(boardLocations.get(19));
 		links.add(boardLocations.get(15));
+		links.add(boardLocations.get(0));
 		boardLocations.get(20).addLinks(links);
 
 	}

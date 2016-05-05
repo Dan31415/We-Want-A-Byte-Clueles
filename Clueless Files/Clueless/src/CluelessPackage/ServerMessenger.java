@@ -87,6 +87,17 @@ public class ServerMessenger {
                     		}
                     		game.endTurnRequest(t);
                     	} 
+                    	if (args_incoming.get(0).equals("move")) {
+                    		System.out.println("Received request from " + args_incoming.get(1) + " to move to " +args_incoming.get(2) );
+                    		User t = null;
+                    		for (int i = 0; i < game.users.size(); i++) {
+                    			if (game.users.get(i).getCharacter().equals(args_incoming.get(1))) {
+                    				t = game.users.get(i);
+                    				break;
+                    			}
+                    		}
+                    		game.requestMoverTo(t,Integer.parseInt(args_incoming.get(2)));
+                    	} 
                     	else {
                     		if (Users == null && args_incoming.get(0).equals("init")) {
                     			TreeMap n = new TreeMap();
@@ -234,7 +245,7 @@ public class ServerMessenger {
         ServerSocket serverPort = null;
         Socket socket = null;
         port = 3000;
-        IP = "96.255.149.87";
+        IP = "108.31.213.246";
         playerCount = 0;
         System.out.println("Clueless Server Process Initialized");
         connectedClients = new ArrayList<ConnectionThread>();

@@ -10,6 +10,8 @@ public class GameBoard {
 	private int numberOfLocations = 21;
 	WeakHashMap<User, Integer> userLocations;
 
+	
+	
 	/**
 	 * This class implements the singleton pattern for global access.
 	 */
@@ -66,6 +68,7 @@ public class GameBoard {
 		ArrayList<Location> links = new ArrayList<Location>();
 		links.add(boardLocations.get(1));
 		links.add(boardLocations.get(5));
+		links.add(boardLocations.get(20));
 		boardLocations.get(0).addLinks(links);
 		links.clear();
 
@@ -87,6 +90,7 @@ public class GameBoard {
 
 		links.add(boardLocations.get(3));
 		links.add(boardLocations.get(7));
+		links.add(boardLocations.get(16));
 		boardLocations.get(4).addLinks(links);
 		links.clear();
 
@@ -136,6 +140,7 @@ public class GameBoard {
 
 		links.add(boardLocations.get(8));
 		links.add(boardLocations.get(16));
+		links.add(boardLocations.get(4));
 		boardLocations.get(13).addLinks(links);
 		links.clear();
 
@@ -172,6 +177,7 @@ public class GameBoard {
 
 		links.add(boardLocations.get(19));
 		links.add(boardLocations.get(15));
+		links.add(boardLocations.get(0));
 		boardLocations.get(20).addLinks(links);
 
 	}
@@ -224,6 +230,35 @@ public class GameBoard {
 		return true;
 	}
 
+	void putSingleUserOnStartingLocation(User user) {
+		
+		   User currentUser = user;
+		   String userCharacter = currentUser.getCharacter();
+		   
+		   switch (userCharacter)   {
+		      case "Miss Scarlet":
+		         userLocations.put(currentUser, new Integer(3));
+		         break;
+		      case "Mrs. Peacock":
+               userLocations.put(currentUser, new Integer(13));
+               break;
+		      case "Mr. Green":
+               userLocations.put(currentUser, new Integer(17));
+               break;
+		      case "Professor Plum":
+               userLocations.put(currentUser, new Integer(5));
+               break;
+		      case "Col Mustard":
+               userLocations.put(currentUser, new Integer(7));
+               break;
+		      case "Mrs. White":
+               userLocations.put(currentUser, new Integer(19));
+               break;
+            default:
+               break;
+		   }
+	   }
+	
 	/**
 	 * Only called once at the start of the game. Differnt from the regular
 	 * "moveUserTo" in that it does not remove a user from their current

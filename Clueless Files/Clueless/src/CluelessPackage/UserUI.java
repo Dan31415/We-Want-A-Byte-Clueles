@@ -19,6 +19,7 @@ import java.awt.Font;
 import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -48,8 +49,8 @@ public class UserUI extends JFrame {
 	private ArrayList<JLabel> userlabels;
 	private ArrayList<JTextField> userLocations;
 	public ClientMessenger cMessenger;
-private UserUI thisUI = this;
-	private User user;
+	private UserUI thisUI = this;
+	public User user;
 	private JTextField chatEntry;
 	private int playersDrawn;
 	/**
@@ -239,7 +240,12 @@ private UserUI thisUI = this;
 		for (LocationButton b: locationButtonList){
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					moveRequest(b.locationNumber);
+					try {
+						moveRequest(b.locationNumber);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			});
 		}
@@ -270,20 +276,20 @@ private UserUI thisUI = this;
 		
 		userlabels = new ArrayList<JLabel> ();
 		
-		JLabel user1Label = new JLabel("Player 1");
+		JLabel user1Label = new JLabel("");
 		user1Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		user1Label.setBounds(562, 259, 169, 14);
 		contentPane.add(user1Label);
 		userlabels.add(user1Label);
 		
 		
-		JLabel user2Label = new JLabel("Player 2");
+		JLabel user2Label = new JLabel("");
 		user2Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		user2Label.setBounds(562, 304, 169, 14);
 		contentPane.add(user2Label);
 		userlabels.add(user2Label);
 		
-		JLabel user3Label = new JLabel("Player 3");
+		JLabel user3Label = new JLabel("");
 		user3Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		user3Label.setBounds(562, 344, 169, 14);
 		contentPane.add(user3Label);
@@ -316,6 +322,7 @@ private UserUI thisUI = this;
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Chatboard.getChatboard().sendUserMessage(user.username, chatEntry.getText() );
+				chatEntry.setText("");
 			}
 		});
 		btnSend.setBounds(117, 768, 89, 23);
@@ -341,7 +348,12 @@ private UserUI thisUI = this;
 		contentPane.add(lblNotePad);
 		endTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				endTurnRequested();
+				try {
+					endTurnRequested();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
                 
@@ -399,12 +411,13 @@ private UserUI thisUI = this;
 	}
 
 
-	 void moveRequest(int location) {
-		user.moveTo(location);
+	 void moveRequest(int location) throws Exception { // called by button clicked on 
+		user.moveTo(location); //msg to server (move,gerard,library)
+		//cMessenger.sendMessage("move,"+this.user.getCharacter()+","+location);
 		
 	}
 
-	 void endTurnRequested() {
+	 void endTurnRequested() throws Exception {
 		user.endTurn();
 		
 	}
@@ -415,7 +428,7 @@ private UserUI thisUI = this;
 		
 	}
 
-	 void passOnAccusation(String character, String weapon, String room) {
+	 void passOnAccusation(String character, String weapon, String room) throws Exception {
 		user.makeAccusation(character, weapon, room);
 	}
 	
@@ -547,4 +560,7 @@ private UserUI thisUI = this;
             panel.add(filler);
             return panel;
         }
+        
+       
+        
 }

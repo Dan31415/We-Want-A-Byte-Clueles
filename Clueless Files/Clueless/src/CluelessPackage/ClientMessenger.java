@@ -16,7 +16,7 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            ServerMessengerIP = "96.255.149.87";
+            ServerMessengerIP = "108.31.213.246";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
@@ -93,8 +93,40 @@ public class ClientMessenger {
                         	 		data = convertToData(str_incoming);
                         	 		System.out.println("Player " + data.get(1) + " has joined.");
                         	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");
-                        	 		attachedUserUI.addPlayer(data.get(1), "FILL IN HERE");
+                        	 		attachedUserUI.addPlayer(data.get(1), attachedUserUI.user.getCharacter());
+                        	 		break; // not handling with new game-on-server implementation, but keep JIC
+                        	 	case "startgame" :
+                        	 		// simple command, but will kick off a bunch/chain of events on client side
+                        	 		System.out.println("Start game transmission received:");
+                        	 		attachedUserUI.userChat.postMessage("WELCOME to a new game... Let's start.");
                         	 		break;
+                        	 	case "deactivate" :
+                        	 		attachedUserUI.user.deactivate();
+                        	 		break;
+                        	 	case "begin_turn" : // will look like "beginTurn,character_name"
+                        	 		if (attachedUserUI.user.getCharacter().equals(data.get(1))) {
+                        	 			attachedUserUI.user.beginTurn();
+                        	 		}
+                        	 		break;
+                        	 	case "init_view" :
+                        	 		attachedUserUI.user.initializeView();
+                        	 		break;
+                        	 	
+                        	 	case "deactivateMovement" : 
+                        	 		
+                        	 		attachedUserUI.deactivateMovement();
+                        	 		//if (attachedUserUI.user.getCharacter().equals(data.get(1))) {
+                        	 			
+                        	 			//attachedUserUI.user.moveTo(Integer.parseInt(data.get(2)));
+                        	 			
+                        	 	//	}
+                        	 		break;
+                        	 	case "position" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.setPlayerLocation(Integer.parseInt(data.get(1)), data.get(2));
+                        	 		break;
+                        	 	case "exit":
+                        	 		System.out.println("Exiting...");
+                        	 		return;
                         	 	default : System.out.println("Received generic message");
                         	 		break;
                         	 }
@@ -109,7 +141,10 @@ public class ClientMessenger {
                          System.err.println("Could not connect to " + ServerMessengerIP);
                      } catch (IOException e) {
                          System.err.println("Could not shake hands with port " + ServerMessengerPort);
-                     }
+                     } catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                  }
             }
        }

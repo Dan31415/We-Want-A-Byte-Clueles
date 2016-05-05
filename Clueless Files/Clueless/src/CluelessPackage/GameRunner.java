@@ -9,6 +9,9 @@ package CluelessPackage;
  * @author WWAB
  *
  */
+
+/*** WE MUST APPEND ARGUMENTS TO THE RUNNING APPLICATION - EITHER "player name" or "server" ***/
+
 public class GameRunner {
 
 	public static void main(String[] args) throws Exception {
@@ -20,30 +23,96 @@ public class GameRunner {
 				sMessenger.main(null);
 			}
 			else {
-				//initialize the gameboard
-				GameBoard.getBoard().initialize();
+				//initialize the gameboard --> now only done on server end
+				//GameBoard.getBoard().initialize();
 		
-				//initialize the game
+				//initialize the game --> now only done on server end
 				System.out.println(args[0]);
-				Game.getGame().initialize(args[0]);
+				//Game.getGame().initialize(args[0]);
 		
 				//*******insert something like Game.getGame.AddUsers(<a list of users>);************
 		
-				//Get the game going
-				Game.getGame().selectFirstPlayer();
+				//Get the game going --> now only done on server end
+				//Game.getGame().selectFirstPlayer();
+				
+				/*** ------------Start of new client code---------------- ***/
+				// initialize user, gameboard (?) on client end
+				// hard coding these in... Gerard and Elaine can't play at same time
+				String t_char;
+				switch (args[0])   {
+			      case "Dan":
+			    	  t_char = "Miss Scarlet";
+			    	  break;
+			      case "Nabil":
+			    	  t_char = "Mrs. Peacock";
+			    	  break;
+			      case "Amanda":
+			    	  t_char = "Mr. Green";
+			    	  break;
+			      case "Gerard":
+			    	  t_char = "Professor Plum";
+			    	  break;
+			      case "Elaine":
+			    	  t_char = "Professor Plum";
+			    	  break;
+			      case "Yuriy":
+			    	  t_char = "Col Mustard";
+			    	  break;
+			      case "Adam":
+			    	  t_char = "Mrs. White";
+			    	  break;
+			      default:
+			    	  t_char = "Bad input";
+			    	  break;
+				}
+				User u = new User(args[0], t_char, false);
+				
 			}
 		}
 		else { 
 			//initialize the gameboard
-			GameBoard.getBoard().initialize();
+			//GameBoard.getBoard().initialize();
 	
 			//initialize the game
-			Game.getGame().initialize("Generic User");
+			//Game.getGame().initialize();
 	
 			//*******insert something like Game.getGame.AddUsers(<a list of users>);************
 	
 			//Get the game going
-			Game.getGame().selectFirstPlayer();
+			//Game.getGame().selectFirstPlayer();
+			
+							/*** ------------Start of new client code---------------- ***/
+				// initialize user, gameboard (?) on client end
+				// hard coding these in... Gerard and Elaine can't play at same time
+				String t_char;
+				switch ("")   {
+			      case "Dan":
+			    	  t_char = "Miss Scarlet";
+			    	  break;
+			      case "Nabil":
+			    	  t_char = "Mrs. Peacock";
+			    	  break;
+			      case "Amanda":
+			    	  t_char = "Mr. Green";
+			    	  break;
+			      case "Gerard":
+			    	  t_char = "Professor Plum";
+			    	  break;
+			      case "Elaine":
+			    	  t_char = "Professor Plum";
+			    	  break;
+			      case "Yuriy":
+			    	  t_char = "Col Mustard";
+			    	  break;
+			      case "Adam":
+			    	  t_char = "Mrs. White";
+			    	  break;
+			      default:
+			    	  t_char = "Bad input";
+			    	  break;
+				}
+				User u = new User("Nabil", "Mrs. Peacock", false);
+				
 		}
 	}
 

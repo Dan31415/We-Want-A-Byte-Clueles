@@ -16,7 +16,7 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            ServerMessengerIP = "108.31.213.246";
+            ServerMessengerIP = "54.172.214.77";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
@@ -92,7 +92,7 @@ public class ClientMessenger {
                         	 		// we know init transmission looks like "init,username", so parse accordingly
                         	 		data = convertToData(str_incoming);
                         	 		System.out.println("Player " + data.get(1) + " has joined.");
-                        	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");
+                        	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");                       	 		
                         	 		attachedUserUI.addPlayer(data.get(1), attachedUserUI.user.getCharacter());
                         	 		break; // not handling with new game-on-server implementation, but keep JIC
                         	 	case "startgame" :

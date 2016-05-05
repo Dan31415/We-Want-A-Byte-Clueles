@@ -62,8 +62,11 @@ public class Game {
 		
 		//determine the cards that go in the envelope
 		murderer = deck.drawCharacter();
+		System.out.println(murderer);
 		murderWeapon = deck.drawWeapon();
 		murderRoom= deck.drawRoom();
+		
+		
 		
 		//now, mix all the cards together before dealing
 		deck.combineDecks();
@@ -83,6 +86,7 @@ public class Game {
 		
 		//get the game going.
 		startNewTurn();
+		sMessenger.sendMessage("chat,"+"the murderer is " +murderer + ", the murder weapon is " +murderWeapon+", the murder room is " +murderRoom );
 		
 			
 		}
@@ -228,7 +232,7 @@ public class Game {
 	}
 
 	void handleAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom, User user) throws Exception {
-		systemChat.sendSystemMessage(user +" is suggesting" +accusedCharacter +" in the "+ accusedRoom + " with the " +accusedWeapon+":");
+		systemChat.sendSystemMessage(user +" is accusing " +accusedCharacter +" in the "+ accusedRoom + " with the " +accusedWeapon+":");
 		if (hypothesisIsCorrect(accusedCharacter, accusedWeapon, accusedRoom )){
 			
 			///send message that game is over

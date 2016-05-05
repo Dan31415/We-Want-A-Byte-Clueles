@@ -92,7 +92,7 @@ public class ClientMessenger {
                         	 		// we know init transmission looks like "init,username", so parse accordingly
                         	 		data = convertToData(str_incoming);
                         	 		System.out.println("Player " + data.get(1) + " has joined.");
-                        	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");
+                        	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");                       	 		
                         	 		attachedUserUI.addPlayer(data.get(1), attachedUserUI.user.getCharacter());
                         	 		break; // not handling with new game-on-server implementation, but keep JIC
                         	 	case "startgame" :

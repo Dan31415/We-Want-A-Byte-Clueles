@@ -270,7 +270,7 @@ public class ServerMessenger {
             System.out.println("Could not open the port on local host IP");
 
         }
-        while (playerCount < 2) {
+        while (playerCount < 6) {
             try {
                 socket = serverPort.accept();
                 System.out.println("Connected to new player " + playerCount);

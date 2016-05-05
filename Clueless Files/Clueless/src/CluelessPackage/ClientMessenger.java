@@ -125,10 +125,10 @@ public class ClientMessenger {
                         	 		attachedUserUI.user.game.murderer = data.get(1);
                         	 		break;
                         	 	case "set_murder_room" : // looks like "position,user_int, location"
-                        	 		attachedUserUI.user.game.murderer = data.get(1);
+                        	 		attachedUserUI.user.game.murderRoom = data.get(1);
                         	 		break;
                         	 	case "set_murder_weapon" : // looks like "position,user_int, location"
-                        	 		attachedUserUI.user.game.murderer = data.get(1);
+                        	 		attachedUserUI.user.game.murderWeapon = data.get(1);
                         	 		break;
                         	 	case "position" : // looks like "position,user_int, location"
                         	 		attachedUserUI.setPlayerLocation(Integer.parseInt(data.get(1)), data.get(2));

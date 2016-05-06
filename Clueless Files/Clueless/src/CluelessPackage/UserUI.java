@@ -526,7 +526,7 @@ public class UserUI extends JFrame {
 	
 	 void passOnSuggestion(String character, String weapon, String room) throws Exception {
 		cMessenger.sendMessage("pass_on_suggestion,"+character+","+weapon+","+room+","+user.getCharacter());
-		user.makeSuggestion(character, weapon, room);
+		//user.makeSuggestion(character, weapon, room);
 	}
 
 	 void setPlayer(int i, User thisUser) {

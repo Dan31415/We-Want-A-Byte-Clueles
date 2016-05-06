@@ -16,7 +16,7 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            ServerMessengerIP = "96.255.149.87";
+            ServerMessengerIP = "108.31.213.246";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;

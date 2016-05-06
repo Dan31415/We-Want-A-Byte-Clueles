@@ -262,7 +262,7 @@ public class ServerMessenger {
         ServerSocket serverPort = null;
         Socket socket = null;
         port = 3000;
-        IP = "96.255.149.87";
+        IP = "108.31.213.246";
         playerCount = 0;
         System.out.println("Clueless Server Process Initialized");
         connectedClients = new ArrayList<ConnectionThread>();
@@ -293,8 +293,10 @@ public class ServerMessenger {
 
         // let Game initialize on player list
 		game = Game.getGame();
+
 		game.initialize(Users);
-		Game.getGame().selectFirstPlayer();
+		game.selectFirstPlayer();
+		game.startNewTurn();
         // end change
     }
 }

@@ -90,7 +90,7 @@ public class Game {
 
 		
 		//get the game going.
-		startNewTurn();
+		
 		sMessenger.sendMessage("chat,"+"the murderer is " +murderer+ " the murder weapon is " +murderWeapon+" the murder room is " +murderRoom );
 		
 			
@@ -125,7 +125,9 @@ public class Game {
 				missScarlet = u;
 			}
 		}
+		
 		playerTurn = users.indexOf(missScarlet);
+
 	}
 
 

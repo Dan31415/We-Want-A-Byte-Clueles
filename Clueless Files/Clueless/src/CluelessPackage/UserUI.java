@@ -671,12 +671,12 @@ public class UserUI extends JFrame {
         
         
         private String myCurrentLocation(){
-        	/*int i = getMyIndex();
+        	int i = getMyIndex();
         	String myLocationNumber = userLocations.get(i).getText();
         	String myLocation = convertLocationNumberToText(myLocationNumber);
         	return myLocation;
-        	*/
-        	return "WHERE?";
+        	
+        	//return "WHERE?";
         }
 
 		private String convertLocationNumberToText(String myLocationNumber) {

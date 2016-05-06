@@ -97,7 +97,9 @@ public class User {
 		view.enableAccuseButton();
 		view.enableEndTurnButton();
 	}
-
+	void deactiveStart(){
+		view.deactiveStartButton();
+	}
 	void serverRequestValidMoves(User user) throws Exception {
 		//view.cMessenger.sendMessage("req_valid_moves," + user.character);
 		//TimeUnit.SECONDS.sleep(1);

@@ -100,6 +100,9 @@ public class ClientMessenger {
                         	 		System.out.println("Start game transmission received:");
                         	 		attachedUserUI.userChat.postMessage("WELCOME to a new game... Let's start.");
                         	 		break;
+                        	 	case "deactivateStart" :
+                        	 		attachedUserUI.user.deactiveStart();
+                        	 		break;
                         	 	case "deactivate" :
                         	 		attachedUserUI.user.deactivate();
                         	 		break;

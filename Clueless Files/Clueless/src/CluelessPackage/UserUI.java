@@ -442,11 +442,13 @@ public class UserUI extends JFrame {
                   
 	}
 	
-	protected void sendStartGameRequest() {
+	protected void sendStartGameRequest() throws Exception {
 		// TODO Auto-generated method stub
-		
+		cMessenger.sendMessage("startGame");
 	}
-
+    void deactiveStartButton() {
+    	btnStartTheGame.setEnabled(false);
+    }
 	User getCurrentUser(){
 		
 		return this.user;

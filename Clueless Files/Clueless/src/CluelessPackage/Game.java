@@ -147,6 +147,10 @@ public class Game {
 		
 		//Send a system message so everyone knows whose turn it is.
 		//systemChat.sendSystemMessage("it is now "+users.get(playerTurn).username+"'s turn.");
+		for (int i =0; i< users.size(); i++)
+		{
+			sMessenger.sendMessage("deactivateStart," + users.get(i).getCharacter());
+		}
 		sMessenger.sendMessage("chat,"+"it is now "+users.get(playerTurn).username+"'s turn.");
 				
 	}

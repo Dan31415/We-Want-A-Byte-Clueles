@@ -545,15 +545,15 @@ public class UserUI extends JFrame {
 		userLocations.get(i).setText(location);		
 	}
 	 
-	 /*void setPlayerLocation2(String characterName, String location) {
+	 void setPlayerLocation2(String characterName, String location) {
 		for (int i = 0; i<userlabels.size(); i++){
 			if(userlabels.get(i).getText().contains(characterName)){
-			userLocations.get(i).setText(locationToString);
+			userLocations.get(i).setText(location);
 			}
 		}
 	}
 
-*/
+
 	 void deactivateAccusationButton() {
 		accusationButton.setEnabled(false);
 		

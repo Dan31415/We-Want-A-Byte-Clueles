@@ -88,13 +88,13 @@ public class GameRunner {
 				String t_char;
 				switch ("")   {
 			      case "Dan":
-			    	  t_char = "Miss Scarlet";
+			    	  t_char = "Mr. Green";
 			    	  break;
 			      case "Nabil":
 			    	  t_char = "Mrs. Peacock";
 			    	  break;
 			      case "Amanda":
-			    	  t_char = "Mr. Green";
+			    	  t_char = "Miss Scarlet";
 			    	  break;
 			      case "Gerard":
 			    	  t_char = "Professor Plum";

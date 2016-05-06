@@ -129,7 +129,12 @@ public class SuggestionWindow extends JFrame {
 		}
 
 	 void passOnSuggestion(String character, String weapon, String room) {
-		userUI.passOnSuggestion(character, weapon, room);
+		try {
+			userUI.passOnSuggestion(character, weapon, room);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setVisible(false);
 		dispose();
 		

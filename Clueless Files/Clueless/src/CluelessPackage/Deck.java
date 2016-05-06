@@ -38,15 +38,17 @@ public class Deck {
 	
 
 	private void populateRoomCards() {
-		roomCards.add("Conservatory");
-		roomCards.add("Billiard Room");
+		roomCards.add("Study");
+		roomCards.add("Hall");
+		roomCards.add("Lounge");
 		roomCards.add("Library");
-		roomCards.add("Ballroom");
-		roomCards.add("Stairway");
-		roomCards.add("Hall1");
-		roomCards.add("Kitchen");
+		roomCards.add("Billiard Room");		
 		roomCards.add("Dining Room");
-		roomCards.add("Hall2");
+		roomCards.add("Conservatory");
+		roomCards.add("Ballroom");		
+		roomCards.add("Kitchen");
+
+		
 		
 	}
 

@@ -47,6 +47,11 @@ public class User {
 		
 		
 	}
+	User(boolean iAmFake) {
+		// i just hold cards to make suggestions work
+		cards = new ArrayList<String>();
+		return;
+	}
 	
 	void sendDeactivate() {
 		sMessenger.sendMessage("deactivate");
@@ -202,6 +207,14 @@ public class User {
    public void setCharacter(String character)
    {
       this.character = character;
+   }
+   
+   public void notifySuggestionSuccess(String matchingCard, String matchingUser, String user) {
+	   if (user.equals(this.character)) {
+		   User n = new User(true);
+		   n.setCharacter(matchingUser);
+		   notifySuggestionSuccess(matchingCard, n);
+	   }
    }
 
 	

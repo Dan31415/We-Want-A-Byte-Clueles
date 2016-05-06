@@ -16,7 +16,7 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            ServerMessengerIP = "96.255.149.87";
+            ServerMessengerIP = "108.31.213.246";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
@@ -125,6 +125,30 @@ public class ClientMessenger {
                         	 		if (attachedUserUI.user.character.equals(data.get(1))) {
                         	 			attachedUserUI.user.takeCard(data.get(2));
                         	 		}
+                        	 		else { // add cards to fake users to make suggestions work
+                        	 			if (attachedUserUI.fake_users.isEmpty()) {
+                        	 				User x = new User(true);
+                        	 				x.setCharacter(data.get(1));
+                        	 				x.takeCard(data.get(2));
+                        	 				attachedUserUI.fake_users.add(x);
+                        	 			}
+                        	 			else {
+                        	 				boolean t = false;
+                        	 				for (User u: attachedUserUI.fake_users) {
+                        	 					if (u.getCharacter().equals(data.get(1))) {
+                        	 						u.takeCard(data.get(2));
+                        	 						t = true;
+                        	 						break;
+                        	 					}
+                        	 				}
+                        	 				if (!t) {
+                            	 				User x = new User(true);
+                            	 				x.setCharacter(data.get(1));
+                            	 				x.takeCard(data.get(2));
+                            	 				attachedUserUI.fake_users.add(x);
+                        	 				}
+                        	 			}
+                        	 		}
                         	 		break;
                         	 	case "set_murderer" : // looks like "position,user_int, location"
                         	 		attachedUserUI.user.game.murderer = data.get(1);
@@ -140,6 +164,10 @@ public class ClientMessenger {
                         	 		break;
                         	 	case "game_won" : // looks like "position,user_int, location"
                         	 		attachedUserUI.deactivateAllButtonsExceptChat();
+                        	 		break;
+                        	 	case "notify_suggestion" : // looks like notify_suggestion,matchingWeapon,matchingCharacter,User character
+                        	 		attachedUserUI.user.notifySuggestionSuccess(data.get(1), data.get(2), data.get(3));
+                        	 		System.out.println(data.get(1)+data.get(2)+ data.get(3));
                         	 		break;
                         	 	case "exit":
                         	 		System.out.println("Exiting...");

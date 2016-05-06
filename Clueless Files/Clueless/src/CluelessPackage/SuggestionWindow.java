@@ -29,7 +29,8 @@ public class SuggestionWindow extends JFrame {
 	String[] weapons = { "Candlestick","Dagger","Lead Pipe","Revolver","Rope","Spanner"};
 	
 	JComboBox roomComboBox;
-	String[] rooms = { "Conservatory","Billiard Room","Library","Ballroom","Stairway","Hall1","Kitchen","Dining Room","Hall2"};
+	
+
 	UserUI userUI;
 
 	/**
@@ -51,8 +52,10 @@ public class SuggestionWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 * @param userUI 
+	 * @param currentLocation 
 	 */
-	 SuggestionWindow(UserUI userUI) {
+	 SuggestionWindow(UserUI userUI, String currentLocation) {
+		 String[] rooms = { currentLocation };
 		this.userUI = userUI;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 484, 271);
@@ -129,12 +132,7 @@ public class SuggestionWindow extends JFrame {
 		}
 
 	 void passOnSuggestion(String character, String weapon, String room) {
-		try {
-			userUI.passOnSuggestion(character, weapon, room);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		userUI.passOnSuggestion(character, weapon, room);
 		setVisible(false);
 		dispose();
 		

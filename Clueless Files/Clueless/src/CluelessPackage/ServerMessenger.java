@@ -87,6 +87,10 @@ public class ServerMessenger {
                     		}
                     		game.endTurnRequest(t);
                     	} 
+                    	if (args_incoming.get(0).equals("pass_on_suggestion")) {
+                    		System.out.println("Received request to make suggestion from " + args_incoming.get(4));
+                    		game.handleSuggestion(args_incoming.get(1),args_incoming.get(2),args_incoming.get(3), args_incoming.get(4));
+                    	} 
                     	if (args_incoming.get(0).equals("move")) {
                     		System.out.println("Received request from " + args_incoming.get(1) + " to move to " +args_incoming.get(2) );
                     		User t = null;
@@ -258,7 +262,7 @@ public class ServerMessenger {
         ServerSocket serverPort = null;
         Socket socket = null;
         port = 3000;
-        IP = "96.255.149.87";
+        IP = "108.31.213.246";
         playerCount = 0;
         System.out.println("Clueless Server Process Initialized");
         connectedClients = new ArrayList<ConnectionThread>();
@@ -289,8 +293,10 @@ public class ServerMessenger {
 
         // let Game initialize on player list
 		game = Game.getGame();
+
 		game.initialize(Users);
-		Game.getGame().selectFirstPlayer();
+		game.selectFirstPlayer();
+		game.startNewTurn();
         // end change
     }
 }

@@ -16,11 +16,12 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            ServerMessengerIP = "108.31.213.246";
+            //ServerMessengerIP = "108.31.213.246";
+        	ServerMessengerIP = "54.172.214.77";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
-            new ConnectionThread().start();
+            new ConnectionThread().start(); 
         }
 
         public void sendMessage(String p_message) throws Exception { // takes in "," separated string
@@ -99,6 +100,9 @@ public class ClientMessenger {
                         	 		// simple command, but will kick off a bunch/chain of events on client side
                         	 		System.out.println("Start game transmission received:");
                         	 		attachedUserUI.userChat.postMessage("WELCOME to a new game... Let's start.");
+                        	 		break;
+                        	 	case "deactivateStart" :
+                        	 		attachedUserUI.user.deactiveStart();
                         	 		break;
                         	 	case "deactivate" :
                         	 		attachedUserUI.user.deactivate();

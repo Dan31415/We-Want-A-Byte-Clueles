@@ -430,7 +430,7 @@ public class UserUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					sendStartGameRequest();
-					btnStartTheGame.setEnabled(false);
+					//btnStartTheGame.setEnabled(false);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -442,11 +442,13 @@ public class UserUI extends JFrame {
                   
 	}
 	
-	protected void sendStartGameRequest() {
+	protected void sendStartGameRequest() throws Exception {
 		// TODO Auto-generated method stub
-		
+		cMessenger.sendMessage("startGame");
 	}
-
+    void deactiveStartButton() {
+    	btnStartTheGame.setEnabled(false);
+    }
 	User getCurrentUser(){
 		
 		return this.user;

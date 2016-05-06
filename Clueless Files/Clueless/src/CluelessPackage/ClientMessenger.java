@@ -112,6 +112,9 @@ public class ClientMessenger {
                         	 			attachedUserUI.user.beginTurn();
                         	 		}
                         	 		break;
+                        	 	case "addplayer":
+                        	 		attachedUserUI.user.addPlayer(data.get(1),data.get(2));
+                        	 		break;
                         	 	case "init_view" :
                         	 		attachedUserUI.user.initializeView();
                         	 		break;

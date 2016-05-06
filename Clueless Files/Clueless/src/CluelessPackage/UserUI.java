@@ -430,7 +430,7 @@ public class UserUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					sendStartGameRequest();
-					btnStartTheGame.setEnabled(false);
+					//btnStartTheGame.setEnabled(false);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -77,16 +77,29 @@ public class ServerMessenger {
                     		return ;
                     	}
                     	if(args_incoming.get(0).equals("startGame")){
-                    		System.out.println("Received request to start game");
-                            // begin change for Game addition
-                            System.out.println("Clueless Game Initialized");
+                    		if (playerCount >2  ) {
+                    			System.out.println("Received request to start game");
+                            	// begin change for Game addition
+                            	System.out.println("Clueless Game Initialized");
 
-                            // let Game initialize on player list
-                    		game = Game.getGame();
+                            	// let Game initialize on player list
+                    			game = Game.getGame();
 
-                    		game.initialize(Users);
-                    		game.selectFirstPlayer();
-                    		game.startNewTurn();
+                    			game.initialize(Users);
+                    			game.selectFirstPlayer();
+                    			game.startNewTurn();
+                    		}
+                    		else {
+                    			for (int i = 0; i < connectedClients.size(); i++) {
+                    				try {
+                    					connectedClients.get(i).sendMessage("chat, Game cannot start until at least 3 players joined.Thanks.");
+                    				} catch (Exception e) {
+                    					e.printStackTrace();
+                    				}
+                    				//out.println(str_incoming + "\n\r");
+                    				//out.flush();
+                    			}
+                    		}
                     	}
                     	if (args_incoming.get(0).equals("end_turn")) {
                     		System.out.println("Received request from " + args_incoming.get(1) + " to end turn.");
@@ -277,7 +290,8 @@ public class ServerMessenger {
         ServerSocket serverPort = null;
         Socket socket = null;
         port = 3000;
-        IP = "108.31.213.246";
+       // IP = "108.31.213.246";
+        IP = "54.172.214.77";
         playerCount = 0;
         System.out.println("Clueless Server Process Initialized");
         connectedClients = new ArrayList<ConnectionThread>();

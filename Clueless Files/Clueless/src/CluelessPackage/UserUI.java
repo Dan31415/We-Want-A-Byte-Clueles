@@ -466,6 +466,7 @@ public class UserUI extends JFrame {
 		for(JLabel label: userlabels){
 			label.repaint();
 		}
+		
 	}
 	
 	void deactivateAllButtonsExceptChat() {

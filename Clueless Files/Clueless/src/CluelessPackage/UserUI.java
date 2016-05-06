@@ -3,6 +3,7 @@ package CluelessPackage;
 
 
 import java.awt.Component;
+
 import javax.swing.JFrame;  
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -21,9 +22,9 @@ import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -524,8 +525,14 @@ public class UserUI extends JFrame {
 	}
 	
 	 void passOnSuggestion(String character, String weapon, String room) {
-		
-		user.makeSuggestion(character, weapon, room);
+	 	try {
+			cMessenger.sendMessage("pass_on_suggestion,"+character+","+weapon+","+room+","+this.user.character);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//user.makeSuggestion(character, weapon, room);
 	}
 
 	 void setPlayer(int i, User thisUser) {

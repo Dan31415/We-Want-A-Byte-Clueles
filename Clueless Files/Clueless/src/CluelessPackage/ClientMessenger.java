@@ -167,6 +167,7 @@ public class ClientMessenger {
                         	 		break;
                         	 	case "notify_suggestion" : // looks like notify_suggestion,matchingWeapon,matchingCharacter,User character
                         	 		attachedUserUI.user.notifySuggestionSuccess(data.get(1), data.get(2), data.get(3));
+                        	 		System.out.println(data.get(1)+data.get(2)+ data.get(3));
                         	 		break;
                         	 	case "exit":
                         	 		System.out.println("Exiting...");

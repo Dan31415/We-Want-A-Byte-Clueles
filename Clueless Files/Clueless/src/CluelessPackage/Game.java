@@ -229,7 +229,6 @@ public class Game {
 		}
 		}
 		if (matchingCard.equals("none")){
-			
 			//send failure message to users
 			systemChat.sendSystemMessage("no cards were found by the suggestion.");
 		}
@@ -238,8 +237,8 @@ public class Game {
 			System.out.println("card " +matchingCard +" was found");
 			
 			//send message to all that a match was found with player "matchingUser"
-			systemChat.sendSystemMessage(matchingUser.username +" has responded to the request.");
-			sMessenger.sendMessage("notify_suggestion,"+matchingCard+","+matchingUser+","+suggestingUser.character);
+			sMessenger.sendMessage("chat,"+matchingUser.username +" has responded to the request.");
+			sMessenger.sendMessage("notify_suggestion,"+matchingCard+","+matchingUser.character+","+suggestingUser.character);
 			//suggestingUser.notifySuggestionSuccess(matchingCard, matchingUser);
 		}
 		

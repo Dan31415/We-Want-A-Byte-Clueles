@@ -10,9 +10,9 @@ public class Game {
 	ArrayList<User> users = new ArrayList<User>();
 	//Within the "users" array, this stores the index of the player whose turn it currently is.
 	int playerTurn;
-	private String murderer;
-	private String murderWeapon;
-	private String murderRoom;
+	public String murderer;
+	public String murderWeapon;
+	public String murderRoom;
 	private Chatboard systemChat;
 	private Deck deck;
 	private GameBoard gameboard; 
@@ -62,8 +62,11 @@ public class Game {
 		
 		//determine the cards that go in the envelope
 		murderer = deck.drawCharacter();
+		System.out.println(murderer);
 		murderWeapon = deck.drawWeapon();
 		murderRoom= deck.drawRoom();
+		
+		
 		
 		//now, mix all the cards together before dealing
 		deck.combineDecks();
@@ -81,8 +84,14 @@ public class Game {
 		sMessenger = new ServerMessenger();
 		sMessenger.sendMessage("startgame");
 		
+		sMessenger.sendMessage("set_murderer,"+murderer);
+		sMessenger.sendMessage("set_murder_weapon,"+murderWeapon);
+		sMessenger.sendMessage("set_murder_room,"+murderRoom);
+
+		
 		//get the game going.
-		startNewTurn();
+		
+		sMessenger.sendMessage("chat,"+"the murderer is " +murderer+ " the murder weapon is " +murderWeapon+" the murder room is " +murderRoom );
 		
 			
 		}
@@ -92,11 +101,14 @@ public class Game {
 	 * Deals on card to each user one-by-one until the deck is empty.
 	 */
 	private void dealCardsToUsers() {
-		
+		sMessenger = new ServerMessenger();
+
 		while (deck.stillContainsCards()){
 			for (User u : users){
 				if (deck.stillContainsCards()){
-				u.takeCard(deck.drawCard());
+					String t_Card = deck.drawCard();
+				u.takeCard(t_Card);
+				sMessenger.sendMessage("add_card,"+u.getCharacter()+","+t_Card);
 		}
 			}
 	}
@@ -113,7 +125,9 @@ public class Game {
 				missScarlet = u;
 			}
 		}
+		
 		playerTurn = users.indexOf(missScarlet);
+
 	}
 
 
@@ -133,6 +147,10 @@ public class Game {
 		
 		//Send a system message so everyone knows whose turn it is.
 		//systemChat.sendSystemMessage("it is now "+users.get(playerTurn).username+"'s turn.");
+		for (int i =0; i< users.size(); i++)
+		{
+			sMessenger.sendMessage("deactivateStart," + users.get(i).getCharacter());
+		}
 		sMessenger.sendMessage("chat,"+"it is now "+users.get(playerTurn).username+"'s turn.");
 				
 	}
@@ -166,16 +184,23 @@ public class Game {
 		
 	}
 
+	void handleSuggestion(String suggestedCharacter, String suggestedWeapon, String suggestedRoom, String suggestingUser) {
+		for (User u : users) {
+			if (u.getCharacter().equals(suggestingUser)) {
+				handleSuggestion(suggestedCharacter, suggestedWeapon, suggestedRoom, u);
+			}
+		}
+	}
 
 	 void handleSuggestion(String suggestedCharacter, String suggestedWeapon, String suggestedRoom, User suggestingUser) {
 		 
-		 JTextArea suggestingUserTextArea = suggestingUser.getUserUI().getChatDisplay();
-		 String userText = suggestingUserTextArea.getText();
+		 //JTextArea suggestingUserTextArea = suggestingUser.getUserUI().getChatDisplay();
+		 //String userText = suggestingUserTextArea.getText();
 		 
 		 systemChat.sendSystemMessage(suggestingUser.username +" is suggesting " +suggestedCharacter +" in the "+ suggestedRoom + " with the " +suggestedWeapon+":");
 		 
-		 suggestingUser.getUserUI().setChatDisplayText("");
-		 suggestingUser.getUserUI().setChatDisplayText(userText);
+		 //suggestingUser.getUserUI().setChatDisplayText("");
+		 //suggestingUser.getUserUI().setChatDisplayText(userText);
 		 
 		 GameBoard b = gameboard;
 		 
@@ -192,7 +217,9 @@ public class Game {
 		
 		//go through the cards of each user. If a match is found with the suggestion, record the matching card and user.
 		for (User u: users){
+			System.out.println("Checking for cards from user " + u.getCharacter());
 			for(String c: u.cards){
+				System.out.println(c);
 				if (c.equals(suggestedCharacter)){
 				matchingUser = u;
 				matchingCard = suggestedCharacter;
@@ -208,17 +235,17 @@ public class Game {
 		}
 		}
 		if (matchingCard.equals("none")){
-			
 			//send failure message to users
 			systemChat.sendSystemMessage("no cards were found by the suggestion.");
 		}
 		else{
 			//send success message to users
-			System.out.println("card " +matchingCard +"was found");
+			System.out.println("card " +matchingCard +" was found");
 			
 			//send message to all that a match was found with player "matchingUser"
-			systemChat.sendSystemMessage(matchingUser.username +" has responded to the request.");
-			suggestingUser.notifySuggestionSuccess(matchingCard, matchingUser);
+			sMessenger.sendMessage("chat,"+matchingUser.username +" has responded to the request.");
+			sMessenger.sendMessage("notify_suggestion,"+matchingCard+","+matchingUser.character+","+suggestingUser.character);
+			//suggestingUser.notifySuggestionSuccess(matchingCard, matchingUser);
 		}
 		
 		//update the user positions since a user may have been moved during the suggestion.
@@ -228,12 +255,15 @@ public class Game {
 	}
 
 	void handleAccusation(String accusedCharacter, String accusedWeapon, String accusedRoom, User user) throws Exception {
-		systemChat.sendSystemMessage(user +" is suggesting" +accusedCharacter +" in the "+ accusedRoom + " with the " +accusedWeapon+":");
+		systemChat.sendSystemMessage(user +" is accusing " +accusedCharacter +" in the "+ accusedRoom + " with the " +accusedWeapon+":");
+		//System.out.println("LOOK" + user.getUserUI().user.game.murderer);
+		
 		if (hypothesisIsCorrect(accusedCharacter, accusedWeapon, accusedRoom )){
 			
 			///send message that game is over
 			systemChat.sendSystemMessage("The accusation was correct: " +user.username +"has won the game!");
-			
+			sMessenger.sendMessage("game_won");
+
 			//disable everyone's buttons except for chat
 			for (User u : users){
 				u.deactivate();
@@ -244,6 +274,7 @@ public class Game {
 		else{
 			//send message that user is out of the game.
 			systemChat.sendSystemMessage("The accusation was wrong. " +user.username +" has lost.");
+			user.getUserUI().deactivateAllButtonsExceptChat();
 			user.isOutOfTheGame();
 			user.moveTo(0);
 			user.endTurn();
@@ -251,9 +282,7 @@ public class Game {
 		}
 	}
 		private boolean hypothesisIsCorrect(String accusedCharacter, String accusedWeapon, String accusedRoom) {
-			if (murderer.equals(accusedCharacter) &&
-					murderWeapon.equals(accusedWeapon) &&
-					murderRoom.equals(accusedRoom)){
+			if (murderer.equals(accusedCharacter) && murderWeapon.equals(accusedWeapon) && murderRoom.equals(accusedRoom)){
 					return true;
 			}
 			else{

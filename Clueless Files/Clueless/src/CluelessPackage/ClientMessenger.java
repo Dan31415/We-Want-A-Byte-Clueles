@@ -16,11 +16,12 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            ServerMessengerIP = "108.31.213.246";
+            //ServerMessengerIP = "108.31.213.246";
+        	ServerMessengerIP = "54.172.214.77";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
-            new ConnectionThread().start();
+            new ConnectionThread().start(); 
         }
 
         public void sendMessage(String p_message) throws Exception { // takes in "," separated string
@@ -92,13 +93,16 @@ public class ClientMessenger {
                         	 		// we know init transmission looks like "init,username", so parse accordingly
                         	 		data = convertToData(str_incoming);
                         	 		System.out.println("Player " + data.get(1) + " has joined.");
-                        	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");
+                        	 		attachedUserUI.userChat.postMessage("Player " + data.get(1) + " has joined.");                       	 		
                         	 		attachedUserUI.addPlayer(data.get(1), attachedUserUI.user.getCharacter());
                         	 		break; // not handling with new game-on-server implementation, but keep JIC
                         	 	case "startgame" :
                         	 		// simple command, but will kick off a bunch/chain of events on client side
                         	 		System.out.println("Start game transmission received:");
                         	 		attachedUserUI.userChat.postMessage("WELCOME to a new game... Let's start.");
+                        	 		break;
+                        	 	case "deactivateStart" :
+                        	 		attachedUserUI.user.deactiveStart();
                         	 		break;
                         	 	case "deactivate" :
                         	 		attachedUserUI.user.deactivate();
@@ -121,8 +125,29 @@ public class ClientMessenger {
                         	 			
                         	 	//	}
                         	 		break;
+                        	 	case "add_card" : // looks like "add_card,character,card
+                        	 		if (attachedUserUI.user.character.equals(data.get(1))) {
+                        	 			attachedUserUI.user.takeCard(data.get(2));
+                        	 		}
+                        	 		break;
+                        	 	case "set_murderer" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.user.game.murderer = data.get(1);
+                        	 		break;
+                        	 	case "set_murder_room" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.user.game.murderRoom = data.get(1);
+                        	 		break;
+                        	 	case "set_murder_weapon" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.user.game.murderWeapon = data.get(1);
+                        	 		break;
                         	 	case "position" : // looks like "position,user_int, location"
                         	 		attachedUserUI.setPlayerLocation(Integer.parseInt(data.get(1)), data.get(2));
+                        	 		break;
+                        	 	case "game_won" : // looks like "position,user_int, location"
+                        	 		attachedUserUI.deactivateAllButtonsExceptChat();
+                        	 		break;
+                        	 	case "notify_suggestion" : // looks like notify_suggestion,matchingWeapon,matchingCharacter,User character
+                        	 		attachedUserUI.user.notifySuggestionSuccess(data.get(1), data.get(2), data.get(3));
+                        	 		System.out.println(data.get(1)+data.get(2)+ data.get(3));
                         	 		break;
                         	 	case "exit":
                         	 		System.out.println("Exiting...");

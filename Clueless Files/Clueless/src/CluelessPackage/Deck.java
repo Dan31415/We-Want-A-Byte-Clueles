@@ -38,15 +38,17 @@ public class Deck {
 	
 
 	private void populateRoomCards() {
-		roomCards.add("Conservatory");
-		roomCards.add("Billiard Room");
+		roomCards.add("Study");
+		roomCards.add("Hall");
+		roomCards.add("Lounge");
 		roomCards.add("Library");
-		roomCards.add("Ballroom");
-		roomCards.add("Stairway");
-		roomCards.add("Hall1");
-		roomCards.add("Kitchen");
+		roomCards.add("Billiard Room");		
 		roomCards.add("Dining Room");
-		roomCards.add("Hall2");
+		roomCards.add("Conservatory");
+		roomCards.add("Ballroom");		
+		roomCards.add("Kitchen");
+
+		
 		
 	}
 
@@ -75,18 +77,25 @@ public class Deck {
  * modified: 4/20/16, Adam Turbiville, changed get to remove to remove solution from deck
  */
 	String drawCharacter() {
+		
+		characterCards.trimToSize();
 		int i = randomGenerator.nextInt(characterCards.size()-1);
 		return characterCards.remove(i);
+		
 	}
 	
 	String drawWeapon() {
+		weaponCards.trimToSize();
 		int i = randomGenerator.nextInt(weaponCards.size()-1);
 		return weaponCards.remove(i);
 	}
 	
 	String drawRoom() {
+		
+		roomCards.trimToSize();
 		int i = randomGenerator.nextInt(roomCards.size()-1);
 		return roomCards.remove(i);
+		
 	}
 
 	void combineDecks() {

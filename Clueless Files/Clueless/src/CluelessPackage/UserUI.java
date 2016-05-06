@@ -39,6 +39,7 @@ public class UserUI extends JFrame {
 	
 	private JButton accusationButton;
 	private JButton endTurnButton;
+	private JButton btnStartTheGame;
 	private JTextArea cardDisplay;
 	private JTextArea chatDisplay;
 	
@@ -53,6 +54,9 @@ public class UserUI extends JFrame {
 	public User user;
 	private JTextField chatEntry;
 	private int playersDrawn;
+	private JTextField player4loc;
+	private JTextField player5loc;
+	private JTextField player6loc;
 	/**
 	 * Launch the application.
 	 
@@ -100,7 +104,7 @@ public class UserUI extends JFrame {
 		panel.setBounds(10, 11, 542, 542);
 		
 		accusationButton = new JButton("Accuse");
-		accusationButton.setBounds(594, 55, 180, 50);
+		accusationButton.setBounds(594, 32, 180, 50);
 
 				contentPane.setLayout(null);
 				
@@ -113,107 +117,128 @@ public class UserUI extends JFrame {
 			panel.setLayout(null);
 			
 			//Add all of the location buttons to a list.
-			LocationButton location0 = new LocationButton("Study", 0);
+			LocationButton location0 = new LocationButton("Study(0)", 0);
+			location0.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location0.setBounds(0, 0, 100, 100);
 			locationButtonList.add(location0);
 			panel.add(location0);
 			
-			LocationButton location1 = new LocationButton("", 1);
-			location1.setBounds(110, 40, 100, 20);
+			LocationButton location1 = new LocationButton("(1)", 1);
+			location1.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location1.setBounds(110, 29, 100, 35);
 			locationButtonList.add(location1);
 			panel.add(location1);
 			
-			LocationButton location2 = new LocationButton("Hall", 2);
+			LocationButton location2 = new LocationButton("Hall(2)", 2);
+			location2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location2.setBounds(220, 0, 100, 100);
 			locationButtonList.add(location2);
 			panel.add(location2);
 			
-			LocationButton location3 = new LocationButton("",3);
-			location3.setBounds(330, 40, 100, 20);
+			LocationButton location3 = new LocationButton("(3)",3);
+			location3.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location3.setBounds(330, 29, 100, 35);
 			locationButtonList.add(location3);
 			panel.add(location3);
 			
-			LocationButton location4 = new LocationButton("Lounge", 4);
+			LocationButton location4 = new LocationButton("Lounge(4)", 4);
+			location4.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location4.setBounds(440, 0, 100, 100);
 			locationButtonList.add(location4);
 			panel.add(location4);
 			
-			LocationButton location5 = new LocationButton("", 5);
-			location5.setBounds(40, 110, 20, 100);
+			LocationButton location5 = new LocationButton("(5)", 5);
+			location5.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location5.setBounds(21, 110, 51, 100);
 			locationButtonList.add(location5);
 			panel.add(location5);
 			
-			LocationButton location6 = new LocationButton("", 6);
-			location6.setBounds(260, 110, 20, 100);
+			LocationButton location6 = new LocationButton("(6)", 6);
+			location6.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location6.setBounds(246, 110, 51, 100);
 			locationButtonList.add(location6);
 			panel.add(location6);
 			
-			LocationButton location7 = new LocationButton("", 7);
-			location7.setBounds(480, 110, 20, 100);
+			LocationButton location7 = new LocationButton("(7)", 7);
+			location7.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location7.setBounds(460, 110, 58, 100);
 			locationButtonList.add(location7);
 			panel.add(location7);
 			
-			LocationButton location8 = new LocationButton("Library", 8);
+			LocationButton location8 = new LocationButton("Library(8)", 8);
+			location8.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location8.setBounds(0, 220, 100, 100);
 			locationButtonList.add(location8);
 			panel.add(location8);
 			
-				LocationButton location9 = new LocationButton("", 9);
-				location9.setBounds(110, 260, 100, 20);
+				LocationButton location9 = new LocationButton("(9)", 9);
+				location9.setFont(new Font("Tahoma", Font.PLAIN, 9));
+				location9.setBounds(110, 253, 100, 35);
 				locationButtonList.add(location9);
 				panel.add(location9);
 			
-			LocationButton location10 = new LocationButton("Billiard Room", 10);
+			LocationButton location10 = new LocationButton("Billiards (10)", 10);
+			location10.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location10.setBounds(220, 220, 100, 100);
 			locationButtonList.add(location10);
 			panel.add(location10);
 			
-			LocationButton location11 = new LocationButton("", 11);
-			location11.setBounds(330, 260, 100, 20);
+			LocationButton location11 = new LocationButton("(11)", 11);
+			location11.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location11.setBounds(330, 253, 100, 35);
 			locationButtonList.add(location11);
 			panel.add(location11);
 			
-			LocationButton location12 = new LocationButton("Dining Room", 12);
+			LocationButton location12 = new LocationButton("Dining(12)", 12);
+			location12.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location12.setBounds(440, 220, 100, 100);
 			locationButtonList.add(location12);
 			panel.add(location12);
 			
-			LocationButton location13 = new LocationButton("", 13);
-			location13.setBounds(40, 330, 20, 100);
+			LocationButton location13 = new LocationButton("(13)", 13);
+			location13.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location13.setBounds(21, 330, 51, 100);
 			locationButtonList.add(location13);
 			panel.add(location13);
 			
-			LocationButton location14 = new LocationButton("", 14);
-			location14.setBounds(260, 330, 20, 100);
+			LocationButton location14 = new LocationButton("(14)", 14);
+			location14.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location14.setBounds(246, 330, 51, 100);
 			locationButtonList.add(location14);
 			panel.add(location14);
 			
-			LocationButton location15 = new LocationButton("", 15);
-			location15.setBounds(480, 330, 20, 100);
+			LocationButton location15 = new LocationButton("(15)", 15);
+			location15.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location15.setBounds(460, 330, 58, 100);
 			locationButtonList.add(location15);
 			panel.add(location15);
 			
-			LocationButton location16 = new LocationButton("Conservatory", 16);
-			location16.setBounds(0, 440, 100, 100);
+			LocationButton location16 = new LocationButton("Conservatory(16)", 16);
+			location16.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			location16.setBounds(0, 440, 127, 100);
 			locationButtonList.add(location16);
 			panel.add(location16);
 			
-			LocationButton location17 = new LocationButton("", 17);
-			location17.setBounds(110, 480, 100, 20);
+			LocationButton location17 = new LocationButton("(17)", 17);
+			location17.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location17.setBounds(137, 465, 73, 40);
 			locationButtonList.add(location17);
 			panel.add(location17);
 			
-			LocationButton location18 = new LocationButton("Ball Room", 18);
+			LocationButton location18 = new LocationButton("Ball Room(18)", 18);
+			location18.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location18.setBounds(220, 440, 100, 100);
 			locationButtonList.add(location18);
 			panel.add(location18);
 			
-			LocationButton location19 = new LocationButton("", 19);
-			location19.setBounds(330, 480, 100, 20);
+			LocationButton location19 = new LocationButton("(19)", 19);
+			location19.setFont(new Font("Tahoma", Font.PLAIN, 9));
+			location19.setBounds(330, 465, 100, 40);
 			locationButtonList.add(location19);
 			panel.add(location19);
                         
-                        LocationButton location20 = new LocationButton("Kitchen", 20);
+            LocationButton location20 = new LocationButton("Kitchen(20)", 20);
+            location20.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			location20.setBounds(440, 440, 100, 100);
 			locationButtonList.add(location20);
 			panel.add(location20);
@@ -252,12 +277,12 @@ public class UserUI extends JFrame {
 		
 		
 		endTurnButton = new JButton("End Turn");
-		endTurnButton.setBounds(594, 156, 180, 50);
+		endTurnButton.setBounds(594, 93, 180, 50);
 		contentPane.add(endTurnButton);
 		
 		userLocations = new ArrayList<JTextField>();
 		JTextField player1loc = new JTextField();
-		player1loc.setBounds(741, 256, 33, 20);
+		player1loc.setBounds(741, 270, 33, 20);
 		contentPane.add(player1loc);
 		player1loc.setColumns(10);
 		userLocations.add(player1loc);
@@ -274,11 +299,29 @@ public class UserUI extends JFrame {
 		contentPane.add(player3loc);
 		userLocations.add(player3loc);
 		
+		player4loc = new JTextField();
+		player4loc.setColumns(10);
+		player4loc.setBounds(741, 383, 33, 20);
+		contentPane.add(player4loc);
+		userLocations.add(player4loc);
+		
+		player5loc = new JTextField();
+		player5loc.setColumns(10);
+		player5loc.setBounds(741, 414, 33, 20);
+		contentPane.add(player5loc);
+		userLocations.add(player5loc);
+		
+		player6loc = new JTextField();
+		player6loc.setColumns(10);
+		player6loc.setBounds(741, 454, 33, 20);
+		contentPane.add(player6loc);
+		userLocations.add(player6loc);
+		
 		userlabels = new ArrayList<JLabel> ();
 		
 		JLabel user1Label = new JLabel("");
 		user1Label.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		user1Label.setBounds(562, 259, 169, 14);
+		user1Label.setBounds(562, 270, 169, 14);
 		contentPane.add(user1Label);
 		userlabels.add(user1Label);
 		
@@ -346,10 +389,48 @@ public class UserUI extends JFrame {
 		JLabel lblNotePad = new JLabel("Note Pad");
 		lblNotePad.setBounds(652, 564, 97, 14);
 		contentPane.add(lblNotePad);
+		
+		JLabel user4label = new JLabel("");
+		user4label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		user4label.setBounds(562, 389, 169, 14);
+		contentPane.add(user4label);
+		userlabels.add(user4label);
+		
+		JLabel user5label = new JLabel("");
+		user5label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		user5label.setBounds(562, 414, 169, 14);
+		contentPane.add(user5label);
+		userlabels.add(user5label);
+		
+		JLabel user6label = new JLabel("");
+		user6label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		user6label.setBounds(562, 454, 169, 14);
+		contentPane.add(user6label);
+		userlabels.add(user6label);
+		
+		btnStartTheGame = new JButton("Start The Game");
+		btnStartTheGame.setBounds(616, 166, 133, 23);
+		contentPane.add(btnStartTheGame);
+		
+
+		
+		
 		endTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					endTurnRequested();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnStartTheGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					sendStartGameRequest();
+					//btnStartTheGame.setEnabled(false);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -361,6 +442,13 @@ public class UserUI extends JFrame {
                   
 	}
 	
+	protected void sendStartGameRequest() throws Exception {
+		// TODO Auto-generated method stub
+		cMessenger.sendMessage("startGame");
+	}
+    void deactiveStartButton() {
+    	btnStartTheGame.setEnabled(false);
+    }
 	User getCurrentUser(){
 		
 		return this.user;
@@ -374,6 +462,9 @@ public class UserUI extends JFrame {
 	void addPlayer(String username, String character) {
 		userlabels.get(playersDrawn).setText(username+" ("+character+")");
 		playersDrawn ++;
+		for(JLabel label: userlabels){
+			label.repaint();
+		}
 	}
 	
 	void deactivateAllButtonsExceptChat() {
@@ -424,7 +515,7 @@ public class UserUI extends JFrame {
 
 
 	 void openSuggestionWindow() {
-		new SuggestionWindow(this);
+		new SuggestionWindow(this, myCurrentLocation());
 		
 	}
 
@@ -443,16 +534,25 @@ public class UserUI extends JFrame {
 	}
 
 	 void setPlayerLocation(int i, String location) {
-		userLocations.get(i).setText(location);
-		
+		userLocations.get(i).setText(location);		
+	}
+	 
+	 /*void setPlayerLocation2(String characterName, String location) {
+		for (int i = 0; i<userlabels.size(); i++){
+			if(userlabels.get(i).getText().contains(characterName)){
+			userLocations.get(i).setText(locationToString);
+			}
+		}
 	}
 
+*/
 	 void deactivateAccusationButton() {
 		accusationButton.setEnabled(false);
 		
 	}
 
 	 void updateCardList(ArrayList<String> cards) {
+		 cardDisplay.setText(null);
 		for (String s: cards){
 			appendToTextArea(cardDisplay, s);
 		}
@@ -504,7 +604,7 @@ public class UserUI extends JFrame {
             tabbedPane.add("Rules",panel1);
             
             JDialog jd = new JDialog();
-            jd.add(tabbedPane);
+            jd.getContentPane().add(tabbedPane);
             jd.setBounds(0,0,600,800);
             jd.setVisible(true);
             
@@ -561,6 +661,57 @@ public class UserUI extends JFrame {
             return panel;
         }
         
-       
         
+        private String myCurrentLocation(){
+        	/*int i = getMyIndex();
+        	String myLocationNumber = userLocations.get(i).getText();
+        	String myLocation = convertLocationNumberToText(myLocationNumber);
+        	return myLocation;
+        	*/
+        	return "WHERE?";
+        }
+
+		private String convertLocationNumberToText(String myLocationNumber) {
+			if (myLocationNumber.equals("0")){
+				return "Study";
+			}
+
+			else if  (myLocationNumber.equals("2")){
+				return "Hall";
+			}
+			else if  (myLocationNumber.equals("4")){
+				return "Lounge";
+			}
+			else if  (myLocationNumber.equals("8")){
+				return "Library";
+			}
+			else if  (myLocationNumber.equals("10")){
+				return "Billiard Room";
+			}
+			else if  (myLocationNumber.equals("12")){
+				return "Dining Room"; 
+			}
+			else if  (myLocationNumber.equals("16")){
+				return "Conservatory";
+			}
+			else if  (myLocationNumber.equals("18")){
+				return "Ballroom";
+			}
+			else if  (myLocationNumber.equals("20")){
+				return "Kitchen";
+			}
+			return null;
+		}
+
+		private int getMyIndex() {
+			int myIndex = -15; 
+			for (int i = 0 ; i<userlabels.size(); i++){
+				if (userlabels.get(i).getText().contains(user.character)){
+					myIndex = i;
+				}
+			}
+			return myIndex;
+		}
+      
+		
 }

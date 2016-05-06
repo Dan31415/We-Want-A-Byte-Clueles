@@ -75,7 +75,32 @@ public class ServerMessenger {
                     		System.out.println("Disconnected from client" + playerNum);
                     		playerCount--;
                     		return ;
-                    	} 
+                    	}
+                    	if(args_incoming.get(0).equals("startGame")){
+                    		if (playerCount >2  ) {
+                    			System.out.println("Received request to start game");
+                            	// begin change for Game addition
+                            	System.out.println("Clueless Game Initialized");
+
+                            	// let Game initialize on player list
+                    			game = Game.getGame();
+
+                    			game.initialize(Users);
+                    			game.selectFirstPlayer();
+                    			game.startNewTurn();
+                    		}
+                    		else {
+                    			for (int i = 0; i < connectedClients.size(); i++) {
+                    				try {
+                    					connectedClients.get(i).sendMessage("chat, Game cannot start until at least 3 players joined.Thanks.");
+                    				} catch (Exception e) {
+                    					e.printStackTrace();
+                    				}
+                    				//out.println(str_incoming + "\n\r");
+                    				//out.flush();
+                    			}
+                    		}
+                    	}
                     	if (args_incoming.get(0).equals("end_turn")) {
                     		System.out.println("Received request from " + args_incoming.get(1) + " to end turn.");
                     		User t = null;
@@ -87,6 +112,10 @@ public class ServerMessenger {
                     		}
                     		game.endTurnRequest(t);
                     	} 
+                    	if (args_incoming.get(0).equals("pass_on_suggestion")) {
+                    		System.out.println("Received request to make suggestion from " + args_incoming.get(4));
+                    		game.handleSuggestion(args_incoming.get(1),args_incoming.get(2),args_incoming.get(3), args_incoming.get(4));
+                    	} 
                     	if (args_incoming.get(0).equals("move")) {
                     		System.out.println("Received request from " + args_incoming.get(1) + " to move to " +args_incoming.get(2) );
                     		User t = null;
@@ -97,6 +126,19 @@ public class ServerMessenger {
                     			}
                     		}
                     		game.requestMoverTo(t,Integer.parseInt(args_incoming.get(2)));
+                    	} 
+                    	if (args_incoming.get(0).equals("game_won")) {
+                    		System.out.println("Game over, someone won");
+                    		for (int i = 0; i < connectedClients.size(); i++) {
+                    			try {
+                    				connectedClients.get(i).sendMessage("chat,"+"Game won");
+									connectedClients.get(i).sendMessage(str_incoming);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+                    			//out.println(str_incoming + "\n\r");
+                    			//out.flush();
+                    		}
                     	} 
                     	else {
                     		if (Users == null && args_incoming.get(0).equals("init")) {
@@ -223,7 +265,10 @@ public class ServerMessenger {
                 } catch (IOException e) {
                     e.printStackTrace();
                     return ;
-                }
+                } catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
     }
@@ -245,7 +290,8 @@ public class ServerMessenger {
         ServerSocket serverPort = null;
         Socket socket = null;
         port = 3000;
-        IP = "108.31.213.246";
+       // IP = "108.31.213.246";
+        IP = "54.172.214.77";
         playerCount = 0;
         System.out.println("Clueless Server Process Initialized");
         connectedClients = new ArrayList<ConnectionThread>();
@@ -257,7 +303,7 @@ public class ServerMessenger {
             System.out.println("Could not open the port on local host IP");
 
         }
-        while (playerCount < 2) {
+        while (playerCount < 6) {
             try {
                 socket = serverPort.accept();
                 System.out.println("Connected to new player " + playerCount);
@@ -271,13 +317,7 @@ public class ServerMessenger {
             t.start();
         }
         TimeUnit.SECONDS.sleep(1);
-        // begin change for Game addition
-        System.out.println("Clueless Game Initialized");
 
-        // let Game initialize on player list
-		game = Game.getGame();
-		game.initialize(Users);
-		Game.getGame().selectFirstPlayer();
         // end change
     }
 }

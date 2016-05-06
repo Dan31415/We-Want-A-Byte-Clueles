@@ -39,15 +39,15 @@ public class GameRunner {
 				// initialize user, gameboard (?) on client end
 				// hard coding these in... Gerard and Elaine can't play at same time
 				String t_char;
-				switch (args[0])   {
+				switch (args[0]){
 			      case "Dan":
-			    	  t_char = "Miss Scarlet";
+			    	  t_char = "Mr. Green";
 			    	  break;
 			      case "Nabil":
 			    	  t_char = "Mrs. Peacock";
 			    	  break;
 			      case "Amanda":
-			    	  t_char = "Mr. Green";
+			    	  t_char = "Miss Scarlet";
 			    	  break;
 			      case "Gerard":
 			    	  t_char = "Professor Plum";
@@ -65,11 +65,12 @@ public class GameRunner {
 			    	  t_char = "Bad input";
 			    	  break;
 				}
+				
 				User u = new User(args[0], t_char, false);
 				
 			}
 		}
-		else { 
+		/*else { 
 			//initialize the gameboard
 			//GameBoard.getBoard().initialize();
 	
@@ -84,16 +85,16 @@ public class GameRunner {
 							/*** ------------Start of new client code---------------- ***/
 				// initialize user, gameboard (?) on client end
 				// hard coding these in... Gerard and Elaine can't play at same time
-				String t_char;
+		/*		String t_char;
 				switch ("")   {
 			      case "Dan":
-			    	  t_char = "Miss Scarlet";
+			    	  t_char = "Mr. Green";
 			    	  break;
 			      case "Nabil":
 			    	  t_char = "Mrs. Peacock";
 			    	  break;
 			      case "Amanda":
-			    	  t_char = "Mr. Green";
+			    	  t_char = "Miss Scarlet";
 			    	  break;
 			      case "Gerard":
 			    	  t_char = "Professor Plum";
@@ -113,7 +114,7 @@ public class GameRunner {
 				}
 				User u = new User("Nabil", "Mrs. Peacock", false);
 				
-		}
+		}*/
 	}
 
 }

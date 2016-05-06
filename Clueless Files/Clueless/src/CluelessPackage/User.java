@@ -14,8 +14,8 @@ public class User {
 	private UserUI view;
 	boolean isInTheGame;
 	ArrayList<String> cards;
-	private Game game;
-	//private GameBoard board;
+	public Game game;
+	private GameBoard board;
 	private boolean isUserTurn;
 	public GameBoard gameBoard;
 	public ServerMessenger sMessenger;
@@ -46,6 +46,11 @@ public class User {
 		deactivate();
 		
 		
+	}
+	User(boolean iAmFake) {
+		// i just hold cards to make suggestions work
+		cards = new ArrayList<String>();
+		return;
 	}
 	
 	void sendDeactivate() {
@@ -92,7 +97,9 @@ public class User {
 		view.enableAccuseButton();
 		view.enableEndTurnButton();
 	}
-
+	void deactiveStart(){
+		view.deactiveStartButton();
+	}
 	void serverRequestValidMoves(User user) throws Exception {
 		//view.cMessenger.sendMessage("req_valid_moves," + user.character);
 		//TimeUnit.SECONDS.sleep(1);
@@ -202,6 +209,14 @@ public class User {
    public void setCharacter(String character)
    {
       this.character = character;
+   }
+   
+   public void notifySuggestionSuccess(String matchingCard, String matchingUser, String user) {
+	   if (user.equals(this.character)) {
+		   User n = new User(true);
+		   n.setCharacter(matchingUser);
+		   notifySuggestionSuccess(matchingCard, n);
+	   }
    }
 
 	

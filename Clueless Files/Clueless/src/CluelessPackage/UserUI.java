@@ -3,7 +3,6 @@ package CluelessPackage;
 
 
 import java.awt.Component;
-
 import javax.swing.JFrame;  
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -22,9 +21,9 @@ import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -58,7 +57,6 @@ public class UserUI extends JFrame {
 	private JTextField player4loc;
 	private JTextField player5loc;
 	private JTextField player6loc;
-	public ArrayList<User> fake_users;
 	/**
 	 * Launch the application.
 	 
@@ -81,7 +79,6 @@ public class UserUI extends JFrame {
 	 * @throws Exception 
 	 */
 	UserUI(User user) throws Exception {
-		fake_users = new ArrayList<User>();
 		Chatboard.getChatboard().addUI(this);
 		this.user = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -516,7 +513,7 @@ public class UserUI extends JFrame {
 
 
 	 void openSuggestionWindow() {
-		new SuggestionWindow(this);
+		new SuggestionWindow(this, myCurrentLocation());
 		
 	}
 
@@ -524,9 +521,9 @@ public class UserUI extends JFrame {
 		user.makeAccusation(character, weapon, room);
 	}
 	
-	 void passOnSuggestion(String character, String weapon, String room) throws Exception {
-		cMessenger.sendMessage("pass_on_suggestion,"+character+","+weapon+","+room+","+user.getCharacter());
-		//user.makeSuggestion(character, weapon, room);
+	 void passOnSuggestion(String character, String weapon, String room) {
+		
+		user.makeSuggestion(character, weapon, room);
 	}
 
 	 void setPlayer(int i, User thisUser) {
@@ -661,6 +658,57 @@ public class UserUI extends JFrame {
             return panel;
         }
         
+        
+        private String myCurrentLocation(){
+        	/*int i = getMyIndex();
+        	String myLocationNumber = userLocations.get(i).getText();
+        	String myLocation = convertLocationNumberToText(myLocationNumber);
+        	return myLocation;
+        	*/
+        	return "WHERE?";
+        }
+
+		private String convertLocationNumberToText(String myLocationNumber) {
+			if (myLocationNumber.equals("0")){
+				return "Study";
+			}
+
+			else if  (myLocationNumber.equals("2")){
+				return "Hall";
+			}
+			else if  (myLocationNumber.equals("4")){
+				return "Lounge";
+			}
+			else if  (myLocationNumber.equals("8")){
+				return "Library";
+			}
+			else if  (myLocationNumber.equals("10")){
+				return "Billiard Room";
+			}
+			else if  (myLocationNumber.equals("12")){
+				return "Dining Room"; 
+			}
+			else if  (myLocationNumber.equals("16")){
+				return "Conservatory";
+			}
+			else if  (myLocationNumber.equals("18")){
+				return "Ballroom";
+			}
+			else if  (myLocationNumber.equals("20")){
+				return "Kitchen";
+			}
+			return null;
+		}
+
+		private int getMyIndex() {
+			int myIndex = -15; 
+			for (int i = 0 ; i<userlabels.size(); i++){
+				if (userlabels.get(i).getText().contains(user.character)){
+					myIndex = i;
+				}
+			}
+			return myIndex;
+		}
       
 		
 }

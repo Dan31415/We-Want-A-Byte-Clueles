@@ -108,6 +108,7 @@ public class User {
 	
 	void moveTo(int i) throws Exception{
 		//game.requestMoverTo(this, i);
+		view.setPlayerLocation2(this.getCharacter(),  Integer.toString(i));
 		view.cMessenger.sendMessage("move,"+this.character+","+i);
 		gameBoard.moveUserTo(this, i);
 		//view.deactivateMovement();

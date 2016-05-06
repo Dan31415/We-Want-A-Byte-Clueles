@@ -16,8 +16,8 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            //ServerMessengerIP = "108.31.213.246";
-        	ServerMessengerIP = "54.172.214.77";
+            ServerMessengerIP = "108.31.213.246";
+        	//ServerMessengerIP = "54.172.214.77";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
@@ -111,6 +111,9 @@ public class ClientMessenger {
                         	 		if (attachedUserUI.user.getCharacter().equals(data.get(1))) {
                         	 			attachedUserUI.user.beginTurn();
                         	 		}
+                        	 		break;
+                        	 	case "addplayer":
+                        	 		attachedUserUI.user.addPlayer(data.get(1),data.get(2));
                         	 		break;
                         	 	case "init_view" :
                         	 		attachedUserUI.user.initializeView();

@@ -140,6 +140,7 @@ public class User {
 		gameBoard.putSingleUserOnStartingLocation(this);
 
 		ArrayList<User> users = game.users;
+		
 		view.updateCardList(cards);
 		
 		for (int i = 0; i < users.size() ; i++){

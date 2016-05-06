@@ -513,7 +513,7 @@ public class UserUI extends JFrame {
 
 
 	 void openSuggestionWindow() {
-		new SuggestionWindow(this);
+		new SuggestionWindow(this, myCurrentLocation());
 		
 	}
 
@@ -658,6 +658,57 @@ public class UserUI extends JFrame {
             return panel;
         }
         
+        
+        private String myCurrentLocation(){
+        	/*int i = getMyIndex();
+        	String myLocationNumber = userLocations.get(i).getText();
+        	String myLocation = convertLocationNumberToText(myLocationNumber);
+        	return myLocation;
+        	*/
+        	return "WHERE?";
+        }
+
+		private String convertLocationNumberToText(String myLocationNumber) {
+			if (myLocationNumber.equals("0")){
+				return "Study";
+			}
+
+			else if  (myLocationNumber.equals("2")){
+				return "Hall";
+			}
+			else if  (myLocationNumber.equals("4")){
+				return "Lounge";
+			}
+			else if  (myLocationNumber.equals("8")){
+				return "Library";
+			}
+			else if  (myLocationNumber.equals("10")){
+				return "Billiard Room";
+			}
+			else if  (myLocationNumber.equals("12")){
+				return "Dining Room"; 
+			}
+			else if  (myLocationNumber.equals("16")){
+				return "Conservatory";
+			}
+			else if  (myLocationNumber.equals("18")){
+				return "Ballroom";
+			}
+			else if  (myLocationNumber.equals("20")){
+				return "Kitchen";
+			}
+			return null;
+		}
+
+		private int getMyIndex() {
+			int myIndex = -15; 
+			for (int i = 0 ; i<userlabels.size(); i++){
+				if (userlabels.get(i).getText().contains(user.character)){
+					myIndex = i;
+				}
+			}
+			return myIndex;
+		}
       
 		
 }

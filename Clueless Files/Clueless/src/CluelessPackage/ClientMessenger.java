@@ -16,7 +16,7 @@ public class ClientMessenger {
         public static UserUI attachedUserUI;
         
         ClientMessenger(UserUI u) throws Exception {
-            ServerMessengerIP = "54.172.214.77";
+            ServerMessengerIP = "96.255.149.87";
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
@@ -120,6 +120,11 @@ public class ClientMessenger {
                         	 			//attachedUserUI.user.moveTo(Integer.parseInt(data.get(2)));
                         	 			
                         	 	//	}
+                        	 		break;
+                        	 	case "add_card" : // looks like "add_card,character,card
+                        	 		if (attachedUserUI.user.character.equals(data.get(1))) {
+                        	 			attachedUserUI.user.takeCard(data.get(2));
+                        	 		}
                         	 		break;
                         	 	case "set_murderer" : // looks like "position,user_int, location"
                         	 		attachedUserUI.user.game.murderer = data.get(1);

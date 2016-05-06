@@ -101,11 +101,14 @@ public class Game {
 	 * Deals on card to each user one-by-one until the deck is empty.
 	 */
 	private void dealCardsToUsers() {
-		
+		sMessenger = new ServerMessenger();
+
 		while (deck.stillContainsCards()){
 			for (User u : users){
 				if (deck.stillContainsCards()){
-				u.takeCard(deck.drawCard());
+					String t_Card = deck.drawCard();
+				u.takeCard(t_Card);
+				sMessenger.sendMessage("add_card,"+u.getCharacter()+","+t_Card);
 		}
 			}
 	}

@@ -125,30 +125,6 @@ public class ClientMessenger {
                         	 		if (attachedUserUI.user.character.equals(data.get(1))) {
                         	 			attachedUserUI.user.takeCard(data.get(2));
                         	 		}
-                        	 		else { // add cards to fake users to make suggestions work
-                        	 			if (attachedUserUI.fake_users.isEmpty()) {
-                        	 				User x = new User(true);
-                        	 				x.setCharacter(data.get(1));
-                        	 				x.takeCard(data.get(2));
-                        	 				attachedUserUI.fake_users.add(x);
-                        	 			}
-                        	 			else {
-                        	 				boolean t = false;
-                        	 				for (User u: attachedUserUI.fake_users) {
-                        	 					if (u.getCharacter().equals(data.get(1))) {
-                        	 						u.takeCard(data.get(2));
-                        	 						t = true;
-                        	 						break;
-                        	 					}
-                        	 				}
-                        	 				if (!t) {
-                            	 				User x = new User(true);
-                            	 				x.setCharacter(data.get(1));
-                            	 				x.takeCard(data.get(2));
-                            	 				attachedUserUI.fake_users.add(x);
-                        	 				}
-                        	 			}
-                        	 		}
                         	 		break;
                         	 	case "set_murderer" : // looks like "position,user_int, location"
                         	 		attachedUserUI.user.game.murderer = data.get(1);

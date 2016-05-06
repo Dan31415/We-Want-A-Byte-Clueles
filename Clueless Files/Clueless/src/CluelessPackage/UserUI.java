@@ -552,6 +552,7 @@ public class UserUI extends JFrame {
 	}
 
 	 void updateCardList(ArrayList<String> cards) {
+		 cardDisplay.setText(null);
 		for (String s: cards){
 			appendToTextArea(cardDisplay, s);
 		}

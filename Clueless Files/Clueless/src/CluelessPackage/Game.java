@@ -79,6 +79,11 @@ public class Game {
 			u.sendInitializeView();
 		}
 		
+		for (int i= 0; i < users.size(); i++){
+			for (int j =0; j < users.size(); j++){
+				sMessenger.sendMessage("addplayer,"+users.get(j).username + "," + users.get(j).character);
+			}
+		}
 		//send system message saying the games has started
 		//systemChat.sendSystemMessage("WELCOME to a new game... Let's start.");
 		sMessenger = new ServerMessenger();

@@ -131,7 +131,9 @@ public class User {
 	void makeSuggestion(String suggestedCharacter, String suggestedWeapon, String suggestedRoom) {
 		game.handleSuggestion(suggestedCharacter, suggestedWeapon, suggestedRoom, this);
 	}
-	
+	void addPlayer(String username, String character){
+		view.addPlayer(username, character);
+	}
 	void sendInitializeView() {
 		sMessenger.sendMessage("init_view");
 	}

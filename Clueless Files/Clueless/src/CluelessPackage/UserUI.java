@@ -39,6 +39,7 @@ public class UserUI extends JFrame {
 	
 	private JButton accusationButton;
 	private JButton endTurnButton;
+	private JButton btnStartTheGame;
 	private JTextArea cardDisplay;
 	private JTextArea chatDisplay;
 	
@@ -103,7 +104,7 @@ public class UserUI extends JFrame {
 		panel.setBounds(10, 11, 542, 542);
 		
 		accusationButton = new JButton("Accuse");
-		accusationButton.setBounds(594, 55, 180, 50);
+		accusationButton.setBounds(594, 32, 180, 50);
 
 				contentPane.setLayout(null);
 				
@@ -276,7 +277,7 @@ public class UserUI extends JFrame {
 		
 		
 		endTurnButton = new JButton("End Turn");
-		endTurnButton.setBounds(594, 156, 180, 50);
+		endTurnButton.setBounds(594, 93, 180, 50);
 		contentPane.add(endTurnButton);
 		
 		userLocations = new ArrayList<JTextField>();
@@ -407,6 +408,12 @@ public class UserUI extends JFrame {
 		contentPane.add(user6label);
 		userlabels.add(user6label);
 		
+		btnStartTheGame = new JButton("Start The Game");
+		btnStartTheGame.setBounds(616, 166, 133, 23);
+		contentPane.add(btnStartTheGame);
+		
+
+		
 		
 		endTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -418,11 +425,28 @@ public class UserUI extends JFrame {
 				}
 			}
 		});
+		
+		btnStartTheGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					sendStartGameRequest();
+					btnStartTheGame.setEnabled(false);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
                 
    
                   
 	}
 	
+	protected void sendStartGameRequest() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	User getCurrentUser(){
 		
 		return this.user;
@@ -633,4 +657,7 @@ public class UserUI extends JFrame {
             panel.add(filler);
             return panel;
         }
+        
+      
+		
 }

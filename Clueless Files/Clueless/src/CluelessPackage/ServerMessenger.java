@@ -291,8 +291,8 @@ public class ServerMessenger {
         Socket socket = null;
         port = 3000;
         //IP = "108.31.213.246";
-        //IP = "54.172.214.77";
-        IP = "96.255.149.87";
+        IP = "54.172.214.77";
+       // IP = "96.255.149.87";
         playerCount = 0;
         System.out.println("Clueless Server Process Initialized");
         connectedClients = new ArrayList<ConnectionThread>();

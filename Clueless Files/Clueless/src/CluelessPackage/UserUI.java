@@ -48,8 +48,8 @@ public class UserUI extends JFrame {
 
 		
 	private ArrayList<LocationButton> locationButtonList;
-	private ArrayList<JLabel> userlabels;
-	private ArrayList<JTextField> userLocations;
+	public ArrayList<JLabel> userlabels;
+	public ArrayList<JTextField> userLocations;
 	public ClientMessenger cMessenger;
 	private UserUI thisUI = this;
 	public User user;

@@ -319,6 +319,14 @@ public class GameBoard {
 		}
 	}
 
+	void remoteMoveUserTo(User user, int moveTo) {
+		// remove the user from current location
+		userLocations.remove(user);
+
+		// and add the user to the new location
+		userLocations.put(user, new Integer(moveTo));
+	}
+	
 	private boolean userIsInARoom(User user) {
 		// get User's locations index
 		int locNum = userLocations.get(user).intValue();

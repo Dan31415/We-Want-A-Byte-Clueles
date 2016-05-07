@@ -73,7 +73,7 @@ public class User {
 		sMessenger.sendMessage("begin_turn,"+this.getCharacter());
 	}
 	void sendPosition(int player, String location){
-		sMessenger.sendMessage("position,"+player+","+location);
+		sMessenger.sendMessage("position,"+player+","+location+","+game.users.get(player).character);
 	}
 	void endTurn() throws Exception {
 		//this.deactivate();
@@ -164,15 +164,7 @@ public class User {
 			sendPosition(i, game.requestLocationOfPlayer(i));
 		}
 	}
-		
-	
 
-	
-		
-		
-		
-		
-		
 		/*
 		for (Location l : occupiedLocations){
 			for (int i = 0; i < users.size() ; i++){

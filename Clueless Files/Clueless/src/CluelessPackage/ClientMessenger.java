@@ -17,7 +17,9 @@ public class ClientMessenger {
         
         ClientMessenger(UserUI u) throws Exception {
             //ServerMessengerIP = "108.31.213.246";
-        	ServerMessengerIP = "54.172.214.77";
+        	//ServerMessengerIP = "54.172.214.77";
+        	ServerMessengerIP = "96.255.149.87";
+
             ServerMessengerPort = 3000;
             transmit_message = "";
             attachedUserUI = u;
@@ -142,8 +144,11 @@ public class ClientMessenger {
                         	 	case "set_murder_weapon" : // looks like "position,user_int, location"
                         	 		attachedUserUI.user.game.murderWeapon = data.get(1);
                         	 		break;
-                        	 	case "position" : // looks like "position,user_int, location"
+                        	 	case "position" : // looks like "position,user_int,location,character"
                         	 		attachedUserUI.setPlayerLocation(Integer.parseInt(data.get(1)), data.get(2));
+                        	 		if (data.get(3).equals(attachedUserUI.user.character)) {
+                        	 			attachedUserUI.user.gameBoard.remoteMoveUserTo(attachedUserUI.user, Integer.parseInt(data.get(2)));
+                        	 		}
                         	 		break;
                         	 	case "game_won" : // looks like "position,user_int, location"
                         	 		attachedUserUI.deactivateAllButtonsExceptChat();

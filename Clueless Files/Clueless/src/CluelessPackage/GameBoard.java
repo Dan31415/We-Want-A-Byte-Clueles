@@ -140,7 +140,7 @@ public class GameBoard {
 
 		links.add(boardLocations.get(8));
 		links.add(boardLocations.get(16));
-		links.add(boardLocations.get(4));
+	//	links.add(boardLocations.get(4));  Incorrent Adjacency
 		boardLocations.get(13).addLinks(links);
 		links.clear();
 
